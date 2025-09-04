@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #2f5182, #25426a);
+    background: linear-gradient(135deg, #2d2e2d, rgb(15, 15, 15));
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -55,7 +55,7 @@ h2 {
 .input-group label {
     display: block;
     margin-bottom: 0.3rem;
-    color: #4d6d85;
+    color: #2d2e2d;
 }
 
 .input-group input {
@@ -69,7 +69,7 @@ h2 {
 button {
     width: 100%;
     padding: 15px;
-    background: #4e904d;
+    background: #736e21;
     border: none;
     color: white;
     font-size: 20px;
@@ -81,13 +81,12 @@ button {
 }
 
 button:hover {
-    background: #397338;
+    background: #d4c606;
 }
 
 .img-logo {
-    width: 40%;
-    height: 40%;
-    margin-bottom: 20px;
+    width: 45%;
+    height: 45%;
     text-align: center;
 }
 
@@ -115,9 +114,8 @@ button:hover {
     }
 
     .img-logo {
-        width: 35%;
-        height: 35%;
-        margin-bottom: 20px;
+        width: 40%;
+        height: 40%;
         text-align: center;
     }
 
@@ -151,8 +149,7 @@ button:hover {
 
     .img-logo {
         width: 40%;
-        height: 35%;
-        margin-bottom: 20px;
+        height: 38%;
         text-align: center;
     }
 

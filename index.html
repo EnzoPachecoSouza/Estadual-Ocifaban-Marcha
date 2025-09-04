@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <img class="img-avaliaAi" src="img/Logo_AvaliaAi.png" alt="">
+
+
+    <div class="container">
+
+        <img class="img-logo" src="img/LOGO_CAMPEONATOMS2025_smallnew_black.png" alt="">
+
+
+        <form class="login-form">
+            <!-- <h2>Login</h2> -->
+            <div class="input-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="Digite seu e-mail" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="Digite sua senha" required>
+            </div>
+            <button onclick="verificarLogin(event)">Entrar</button>
+        </form>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

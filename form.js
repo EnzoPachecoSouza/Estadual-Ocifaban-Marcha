@@ -28,32 +28,50 @@ function atualizarFormulario() {
     console.log("atualizou");
 
     //-----------------------------------------------------------------------------------------------------------------
-    if (avaliador === "Paulo Roberto Charão") {
-        aspecto = "Aspecto Técnico";
+    if (avaliador === "Edmilson Chiquinho") {
+        aspecto = "Aspecto Sopros";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
     }
-    else if (avaliador === "Rafael Rauski") {
-        aspecto = "Aspecto Interpretação";
-        quesitos = ["Regência", "Fraseado", "Expressão", "Escolha de Repertório"];
+    else if (avaliador === "Marcelo Bambam") {
+        aspecto = "Aspecto Sopros";
+        quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
     }
-    else if (avaliador === "Ewerton Ravelli") {
+    else if (avaliador === "Marco Almeida Jr") {
         aspecto = "Aspecto Interpretação";
-        quesitos = ["Regência", "Fraseado", "Expressão", "Escolha de Repertório"];
+        quesitos = ["Fraseado", "Expressão", "Regência", "Escolha de Repertório"];
     }
-    else if (avaliador === "Carlos Cristiano") {
+    else if (avaliador === "Jorge Scheffer") {
+        aspecto = "Aspecto Interpretação";
+        quesitos = ["Fraseado", "Expressão", "Regência", "Escolha de Repertório"];
+    }
+    else if (avaliador === "Hércules Alves") {
+        aspecto = "Aspecto Percussão";
+        quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
+    }
+    else if (avaliador === "Luiz Caldana") {
         aspecto = "Aspecto Percussão";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
     }
     //-----------------------------------------------------------------------------------------------------------------
 
-    else if (avaliador === "Emerson Palazzi") {
+    else if (avaliador === "Eliane Humberg") {
         aspecto = "Aspecto Uniformidade e Instrumental";
         quesitos = ["Uniformidade", "Instrumental"];
     }
 
+    // else if (avaliador === "Antônio Carlos Schmidt") {
+    //     aspecto = "Aspecto Marcha e Garbo";
+    //     quesitos = ["Marcha", "Garbo"];
+    // }
+
     else if (avaliador === "Antônio Carlos Schmidt") {
-        aspecto = "Aspecto Marcha e Garbo";
-        quesitos = ["Marcha", "Garbo"];
+        aspecto = "Aspecto Marcha";
+        quesitos = ["Marcha"];
+    }
+
+    else if (avaliador === "Felipe Sangali") {
+        aspecto = "Aspecto Garbo";
+        quesitos = ["Garbo"];
     }
 
     else if (avaliador === "Airton Moreira") {
@@ -61,7 +79,7 @@ function atualizarFormulario() {
         quesitos = ["Alinhamento"];
     }
 
-    else if (avaliador === "Washington Souza") {
+    else if (avaliador === "Celso Ribeiro") {
         aspecto = "Aspecto Cobertura";
         quesitos = ["Cobertura"];
     }
@@ -103,19 +121,19 @@ function atualizarFormulario() {
         quesitos = ["Criatividade", "Dificuldade Técnica", "Sincronismo", "Formação", "Evolução", "Ritmo", "Marcha", "Garbo", "Alinhamento", "Uniformidade"];
     }
 
-    else if (avaliador === "Eliane Humberg") {
+    else if (avaliador === "Baliza") {
         aspecto = "Aspecto Baliza";
         quesitos = ["Coreografia", "Movimentos Acrobáticos", "Elementos", "Manuseio do Bastão", "Garbo", "Marcha", "Comunicação com o Público", "Uniformidade"];
     }
 
     //---------------------------------------------------------------------------------------------------------------------
 
-    if (aspecto === "Aspecto Técnico" || aspecto === "Aspecto Interpretação" || aspecto === "Aspecto Percussão") {
+    if (aspecto === "Aspecto Sopros" || aspecto === "Aspecto Interpretação" || aspecto === "Aspecto Percussão") {
         aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
         quesitos.forEach((q, index) => {
             quesitosDiv.innerHTML += `
                 <label for="quesito${index + 1}">${q}:</label>
-                <input type="number" step="0.2" id="quesito${index + 1}" name="quesito${index + 1}" min="5" max="10" placeholder="De 5,00 até 10,00" required><br>
+                <input type="number" step="0.2" id="quesito${index + 1}" name="quesito${index + 1}" min="0" max="10" placeholder="De 0,00 até 10,00" required><br>
             `;
         });
     }
@@ -125,7 +143,7 @@ function atualizarFormulario() {
         quesitos.forEach((q, index) => {
             quesitosDiv.innerHTML += `
                 <label for="quesito${index + 1}">${q}:</label>
-                <input type="number" step="0.2" id="quesito${index + 1}" name="quesito${index + 1}" min="5" max="10" placeholder="De 5,00 até 10,00" required><br>
+                <input type="number" step="0.2" id="quesito${index + 1}" name="quesito${index + 1}" min="0" max="10" placeholder="De 0,00 até 10,00" required><br>
             `;
         });
     }
@@ -169,7 +187,7 @@ function atualizarFormulario() {
 
     //----------------------------------------------------------------------------------------------------------------
 
-    else if (avaliador === "Washington Souza") {
+    else if (avaliador === "Celso Ribeiro") {
         aspecto = "Aspecto Cobertura";
         quesitosDiv.innerHTML = `
     <div class="input-grid-config">
@@ -205,7 +223,7 @@ function atualizarFormulario() {
 
     //---------------------------------------------------------------------------------------------------------------------
 
-    else if (avaliador === "Emerson Palazzi") {
+    else if (avaliador === "Eliane Humberg") {
         aspecto = "Aspecto Uniformidade e Instrumental";
         quesitosDiv.innerHTML = `
     <div class="input-grid-config">
@@ -255,9 +273,68 @@ function atualizarFormulario() {
     }
     //--------------------------------------------------------------------------------
 
+    // else if (avaliador === "Antônio Carlos Schmidt") {
+    //     aspecto = "Aspecto Garbo e Marcha";
+    //     quesitosDiv.innerHTML = `
+    //     <div class="input-grid-config">
+    //         <label for="colunas">Frente</label>
+    //         <input class="input-pista" type="number" id="linhas" min="1" style="width: 60px;" />
+    //         <label for="linhas">Lateral</label>
+    //         <input class="input-pista" type="number" id="colunas" min="1" style="width: 60px;" />
+
+    //     </div>
+
+    //     <button type="button" onclick="renderMarchaGarboGrid()">Gerar Formação</button>
+
+    //     <div class="quadrantes">
+    //      <div class="quadrante">
+    //             <h3>Marcha</h3>
+    //             <div class="nota-container">
+    //                 <div class="nota-display" id="notaMarcha">10.00</div>
+    //             </div>
+    //             <div class="grid-checkboxes" id="marcha-grid"></div>
+    //             <div class="erros-container">
+    //                 <label>ERROS</label>
+    //                 <div class="controle-erros">
+    //                     <span class="contador" id="marcha-erros">0</span>
+    //                 </div>
+    //             </div>
+    //         </div>
+
+    //         <div class="quadrante">
+    //             <h3>Garbo</h3>
+    //             <div class="nota-container">
+    //                 <div class="nota-display" id="notaGarbo">10.00</div>
+    //             </div>
+    //             <div class="grid-checkboxes" id="garbo-grid"></div>
+    //             <div class="erros-container">
+    //                 <label>ERROS</label>
+    //                 <div class="controle-erros">
+    //                     <span class="contador" id="garbo-erros">0</span>
+    //                 </div>
+    //             </div>
+    //         </div>  
+    //     </div>
+
+    //     <!-- Campos ocultos para envio do formulário -->
+    //     <input type="hidden" id="inputGarbo" name="quesito1" value="10.00">
+    //     <input type="hidden" id="inputMarcha" name="quesito2" value="10.00">
+
+    //     <div id="baliza-sexo-container">
+    //     <h3>Rompimento de Marcha
+    //     <br>
+    //     (conforme art. 26º)</h3>
+    //     <select id="verificaRompimento" name="verificaRompimento" required>
+    //         <option value="">Selecione</option>
+    //         <option value="Valido">Válido</option>
+    //         <option value="Invalido">Inválido</option>
+    //     </select>
+    //     </div>
+    // `;
+    // }
 
     else if (avaliador === "Antônio Carlos Schmidt") {
-        aspecto = "Aspecto Garbo e Marcha";
+        aspecto = "Aspecto Marcha";
         quesitosDiv.innerHTML = `
         <div class="input-grid-config">
             <label for="colunas">Frente</label>
@@ -267,7 +344,7 @@ function atualizarFormulario() {
             
         </div>
 
-        <button type="button" onclick="renderMarchaGarboGrid()">Gerar Formação</button>
+        <button type="button" onclick="renderMarchaGrid()">Gerar Formação</button>
 
         <div class="quadrantes">
          <div class="quadrante">
@@ -283,7 +360,38 @@ function atualizarFormulario() {
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Campos ocultos para envio do formulário -->
+        <input type="hidden" id="inputMarcha" name="quesito2" value="10.00">
+
+        <div id="baliza-sexo-container">
+        <h3>Rompimento de Marcha
+        <br>
+        (conforme art. 26º)</h3>
+        <select id="verificaRompimento" name="verificaRompimento" required>
+            <option value="">Selecione</option>
+            <option value="Valido">Válido</option>
+            <option value="Invalido">Inválido</option>
+        </select>
+        </div>
+    `;
+    }
+
+    else if (avaliador === "Felipe Sangali") {
+        aspecto = "Aspecto Garbo";
+        quesitosDiv.innerHTML = `
+        <div class="input-grid-config">
+            <label for="colunas">Frente</label>
+            <input class="input-pista" type="number" id="linhas" min="1" style="width: 60px;" />
+            <label for="linhas">Lateral</label>
+            <input class="input-pista" type="number" id="colunas" min="1" style="width: 60px;" />
+            
+        </div>
+
+        <button type="button" onclick="renderGarboGrid()">Gerar Formação</button>
+
+        <div class="quadrantes">
             <div class="quadrante">
                 <h3>Garbo</h3>
                 <div class="nota-container">
@@ -301,17 +409,6 @@ function atualizarFormulario() {
 
         <!-- Campos ocultos para envio do formulário -->
         <input type="hidden" id="inputGarbo" name="quesito1" value="10.00">
-        <input type="hidden" id="inputMarcha" name="quesito2" value="10.00">
-
-        <div id="baliza-sexo-container">
-        <h3>Rompimento de Marcha
-        <br>
-        (conforme art. 26º)</h3>
-        <select id="verificaRompimento" name="verificaRompimento" required>
-            <option value="">Selecione</option>
-            <option value="Valido">Válido</option>
-            <option value="Invalido">Inválido</option>
-        </select>
         </div>
     `;
     }
@@ -478,7 +575,21 @@ function renderUniformidadeInstrumentalGrid() {
     gerarGrid('instrumental', linhas, colunas);
 }
 
-function renderMarchaGarboGrid() {
+function renderMarchaGrid() {
+    const linhas = parseInt(document.getElementById('linhas').value);
+    const colunas = parseInt(document.getElementById('colunas').value);
+
+    if (isNaN(linhas) || isNaN(colunas) || linhas <= 0 || colunas <= 0) {
+        alert('Informe um número válido de linhas e colunas.');
+        return;
+    }
+
+    document.getElementById('marcha-erros').innerText = '0';
+
+    gerarGrid('marcha', linhas, colunas);
+}
+
+function renderGarboGrid() {
     const linhas = parseInt(document.getElementById('linhas').value);
     const colunas = parseInt(document.getElementById('colunas').value);
 
@@ -488,10 +599,8 @@ function renderMarchaGarboGrid() {
     }
 
     document.getElementById('garbo-erros').innerText = '0';
-    document.getElementById('marcha-erros').innerText = '0';
 
     gerarGrid('garbo', linhas, colunas);
-    gerarGrid('marcha', linhas, colunas);
 }
 //-----------------------------------------------------------------------------------------------------------
 
@@ -561,7 +670,7 @@ function contarSelecionados(tipo) {
     // Desabilita checkboxes se a nota chegar a 5
     checkboxes.forEach(checkbox => {
         if (!checkbox.checked) {
-            checkbox.disabled = nota <= 5;
+            checkbox.disabled = nota <= 0;
         }
     });
 }
@@ -594,13 +703,15 @@ function resetarUniformidadeInstrumental() {
     document.getElementById('instrumental-grid').innerHTML = '';
 }
 
-function resetarMarchaGarbo() {
+function resetarMarcha() {
     // Resetar campos visuais e ocultos para Alinhamento
     document.getElementById('notaMarcha').innerText = '10.00';
     document.getElementById('inputMarcha').value = '10.00';
     document.getElementById('marcha-erros').innerText = '0';
     document.getElementById('marcha-grid').innerHTML = '';
+}
 
+function resetarGarbo() {
     // Resetar campos visuais e ocultos para Marcha
     document.getElementById('notaGarbo').innerText = '10.00';
     document.getElementById('inputGarbo').value = '10.00';
@@ -718,7 +829,7 @@ function alterarErro(tipo, alteracao) {
     elementoErros.textContent = novoValor;
 
     // Calcula nova nota (5.00 - novoValor * 0.10)
-    const nota = Math.max(1, 5 - (novoValor * 0.1)).toFixed(2);
+    const nota = Math.max(0, 10 - (novoValor * 0.1)).toFixed(2);
 
     // Atualiza exibição e campo oculto
     document.getElementById(`nota${tipoCapitalizado}`).textContent = nota;
@@ -761,7 +872,7 @@ function atualizarEstadoBotoes(tipo, valorAtual) {
 
 // Função para calcular nota baseada em erros
 function calcularNota(erros) {
-    return Math.max(5, 10 - (erros * 0.1)).toFixed(2);
+    return Math.max(0, 10 - (erros * 0.1)).toFixed(2);
 }
 
 
@@ -828,7 +939,7 @@ function abrirModalConfirmacao(event) {
         modalBody.innerHTML = `
             <p><strong>Alinhamento</strong>Apontamentos: ${errosAlinhamento}</p>
         `;
-    } else if (avaliador === "Washington Souza") {
+    } else if (avaliador === "Celso Ribeiro") {
         const errosCobertura = document.getElementById("cobertura-erros").textContent;
 
 
@@ -837,16 +948,19 @@ function abrirModalConfirmacao(event) {
         `;
     } else if (avaliador === "Antônio Carlos Schmidt") {
         const errosMarcha = document.getElementById("marcha-erros").textContent;
-        const errosGarbo = document.getElementById("garbo-erros").textContent;
-
-
 
         modalBody.innerHTML = `
             <p><strong>Marcha</strong>Apontamentos: ${errosMarcha}</p>
+        `;
+    }
+    else if (avaliador === "Felipe Sangali") {
+        const errosGarbo = document.getElementById("garbo-erros").textContent;
+
+        modalBody.innerHTML = `
             <p><strong>Garbo</strong>Apontamentos: ${errosGarbo}</p>
         `;
     }
-    else if (avaliador === "Emerson Palazzi") {
+    else if (avaliador === "Eliane Humberg") {
         const errosUniformidade = document.getElementById("uniformidade-erros").textContent;
         const errosInstrumental = document.getElementById("instrumental-erros").textContent;
 
@@ -918,25 +1032,15 @@ function enviarAvaliacao() {
 
         // Pega os valores das notas ocultas de Garbo e Marcha
         const inputMarcha = document.getElementById("inputMarcha");
-        const inputGarbo = document.getElementById("inputGarbo");
 
         const valorMarcha = parseFloat(inputMarcha.value);
-        const valorGarbo = parseFloat(inputGarbo.value);
 
-        if (isNaN(valorMarcha) || valorMarcha < 5) {
-            alert("⚠️ O valor de Marcha deve ser maior ou igual a 5.");
+        if (isNaN(valorMarcha) || valorMarcha < 0) {
+            alert("⚠️ O valor de Marcha deve ser maior ou igual a 0.");
             camposInvalidos = true;
         } else {
             dados["quesito1"] = valorMarcha;
         }
-        if (isNaN(valorGarbo) || valorGarbo < 5) {
-            alert("⚠️ O valor de Garbo deve ser maior ou igual a 5.");
-            camposInvalidos = true;
-        } else {
-            dados["quesito2"] = valorGarbo;
-        }
-
-
 
         if (camposInvalidos) return;
 
@@ -949,6 +1053,24 @@ function enviarAvaliacao() {
         dados["quesito3"] = rompimentoSelect.value;
     }
 
+    if (avaliador === "Felipe Sangali") {
+        let camposInvalidos = false;
+
+        // Pega os valores das notas ocultas de Garbo e Marcha
+        const inputGarbo = document.getElementById("inputGarbo");
+
+        const valorGarbo = parseFloat(inputGarbo.value);
+
+        if (isNaN(valorGarbo) || valorGarbo < 0) {
+            alert("⚠️ O valor de Garbo deve ser maior ou igual a 0.");
+            camposInvalidos = true;
+        } else {
+            dados["quesito2"] = valorGarbo;
+        }
+
+        if (camposInvalidos) return;
+    }
+
 
     else {
         // Para os outros avaliadores (seu código original)
@@ -957,11 +1079,11 @@ function enviarAvaliacao() {
             let nomeCampo = input.name; // Nome do quesito
             let valorCampo = input.value.trim();
 
-            if (avaliador === "Airton Moreira" || avaliador === "Washington Souza") {
+            if (avaliador === "Airton Moreira" || avaliador === "Celso Ribeiro") {
                 if (input.type === "hidden") {
                     let valor = valorCampo === "" ? NaN : parseFloat(valorCampo);
-                    if (isNaN(valor) || valor < 5 || valor > 10) {
-                        alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 5 e 10`);
+                    if (isNaN(valor) || valor < 0 || valor > 10) {
+                        alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 0 e 10`);
                         camposInvalidos = true;
                         return;
                     }
@@ -973,7 +1095,7 @@ function enviarAvaliacao() {
                 let valor = valorNormalizado === "" ? NaN : parseFloat(valorNormalizado);
 
                 // Validação específica dos técnicos
-                if (["Ewerton Ravelli", "Rafael Rauski", "Paulo Roberto Charão", "Carlos Cristiano", "Eliane Humberg", "Bruno Machado"].includes(avaliador)) {
+                if (["Edmilson Chiquinho", "Marcelo Bambam", "Marco Almeida Jr. ", "Jorge Scheffer","Hércules Alves", "Luiz Caldana", "Eliane Humberg", "Bruno Machado"].includes(avaliador)) {
                     // Checagem de casas decimais (máx. 2)
                     if (valorNormalizado.includes('.')) {
                         const casasDecimais = (valorNormalizado.split('.')[1] || "");
@@ -985,8 +1107,8 @@ function enviarAvaliacao() {
                     }
 
                     // Faixa permitida é 5–10 (o texto do alerta abaixo também deve refletir isso)
-                    if (isNaN(valor) || valor < 5 || valor > 10) {
-                        alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 5 e 10.`);
+                    if (isNaN(valor) || valor < 0 || valor > 10) {
+                        alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 0 e 10.`);
                         camposInvalidos = true;
                         return;
                     }
@@ -1000,8 +1122,8 @@ function enviarAvaliacao() {
                 }
 
                 // Emerson Palazzi (mantive sua lógica, mas ajustei mensagem)
-                if (avaliador === "Emerson Palazzi" && (isNaN(valor) || valor < 5 || valor > 10)) {
-                    alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 5 e 10.`);
+                if (avaliador === "Eliane Humberg" && (isNaN(valor) || valor < 0 || valor > 10)) {
+                    alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 0 e 10.`);
                     camposInvalidos = true;
                     return;
                 }
@@ -1012,10 +1134,11 @@ function enviarAvaliacao() {
                 if (
                     avaliador !== "etaria" &&
                     avaliador !== "Antônio Carlos Schmidt" &&
-                    avaliador !== "Emerson Palazzi" &&
-                    (isNaN(valor) || valor < 5 || valor > 10)
+                    avaliador !== "Felipe Sangali" &&
+                    avaliador !== "Eliane Humberg" &&
+                    (isNaN(valor) || valor < 0 || valor > 10)
                 ) {
-                    alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 5 e 10`);
+                    alert(`⚠️ O valor do campo "${nomeCampo}" deve estar entre 0 e 10`);
                     camposInvalidos = true;
                     return;
                 }
@@ -1025,7 +1148,7 @@ function enviarAvaliacao() {
 
             else {
                 if (valorCampo === "") {
-                    if (avaliador === "Gabriel Correcher" && nomeCampo === "quesito2" || nomeCampo === "quesito3" || nomeCampo === "quesito4") {
+                    if (avaliador === "Dados" && nomeCampo === "quesito2" || nomeCampo === "quesito3" || nomeCampo === "quesito4") {
                         // Exceção para esse caso específico
                     } else {
                         alert(`⚠️ O campo "${nomeCampo}" não pode estar vazio`);
@@ -1159,7 +1282,7 @@ function habibilitarCampos() {
         // Atualiza os botões de uniformidade
         document.getElementById("btnMinusAlinhamento").disabled = (errosAlin === 0);
         document.getElementById("btnPlusAlinhamento").disabled = (errosAlin === 40);
-    } else if (avaliador === "Washington Souza") {
+    } else if (avaliador === "Celso Ribeiro") {
         const errosCober = parseInt(document.getElementById("errosCobertura").textContent);
 
         // Atualiza os botões de instrumental
@@ -1169,18 +1292,146 @@ function habibilitarCampos() {
 }
 
 // // Função para gerar PDF
-function printPDF() {
-    if (document.getElementById("icon-pdf").classList.contains("disabled")) {
-        alert("⚠️ Você precisa enviar a avaliação primeiro!");
-        return;
-    }
+// function printPDF() {
+    // if (document.getElementById("icon-pdf").classList.contains("disabled")) {
+    //     alert("⚠️ Você precisa enviar a avaliação primeiro!");
+    //     return;
+    // }
 
-    window.print();
+    // window.print();
 
-    // Habilita o botão de reset após gerar o PDF
-    document.getElementById("icon-reset").classList.remove("disabled");
+    // // Habilita o botão de reset após gerar o PDF
+    // document.getElementById("icon-reset").classList.remove("disabled");
 
+
+const SELETOR_ALVO_CAPTURA = ".container-pai"; // mude se necessário
+
+async function printPDF(formatoPreferido = 'png') {
+  if (document.getElementById("icon-pdf").classList.contains("disabled")) {
+    alert("⚠️ Você precisa enviar a avaliação primeiro!");
+    return;
+  }
+  const avaliador = getAvaliador();
+  const corporacao = document.getElementById("corporacao")?.value || "";
+  if (!avaliador || !corporacao) {
+    alert("⚠️ Preencha Avaliador e Corporação antes de gerar.");
+    return;
+  }
+  const nomeBase = sanitizeFileName(`${corporacao} - ${avaliador}`);
+
+  // alvo da captura (use "body" se quiser a página inteira)
+  const alvo = document.querySelector(SELETOR_ALVO_CAPTURA) || document.body;
+  if (!alvo) {
+    alert("⚠️ Não encontrei o elemento da avaliação para capturar.");
+    return;
+  }
+
+  // Dimensões REAIS do conteúdo (inclui o que está fora da viewport)
+  const pageWidth = Math.max(
+    alvo.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.scrollWidth,
+    window.innerWidth
+  );
+  const pageHeight = Math.max(
+    alvo.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.scrollHeight,
+    window.innerHeight
+  );
+
+  // Escala segura (aumente/diminua conforme a necessidade/performace)
+  const baseScale = Math.min(window.devicePixelRatio || 2, 3);
+
+  const canvas = await html2canvas(alvo, {
+    backgroundColor: "#ffffff",
+    useCORS: true,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: pageWidth,
+    windowHeight: pageHeight,
+    scale: baseScale,
+    // Ajustes no DOM clonado para evitar cortes
+    onclone: (doc) => {
+      const el = doc.querySelector(SELETOR_ALVO_CAPTURA) || doc.body;
+
+      // Remover limites que possam cortar o conteúdo
+      el.style.overflow = "visible";
+      el.style.height = "auto";
+      el.style.maxHeight = "none";
+      el.style.maxWidth = "none";
+
+      // Desativar transforms que às vezes causam clipping
+      el.style.transform = "none";
+
+      // Se houver wrappers/containers que limitam altura/overflow, libere-os também:
+      // doc.querySelectorAll('.wrapper, .content, #formulario').forEach(node => {
+      //   node.style.overflow = "visible";
+      //   node.style.height = "auto";
+      //   node.style.maxHeight = "none";
+      //   node.style.transform = "none";
+      // });
+
+      // Opcional: esconda elementos que não devem sair na imagem (ex.: botões)
+      // Basta adicionar class="nocapture" neles no seu HTML/CSS
+      doc.querySelectorAll('.nocapture').forEach(node => (node.style.display = 'none'));
+
+      // Opcional: elementos fixos/sticky podem sobrepor; torne-os estáticos na captura
+      doc.querySelectorAll('.fixed, .sticky').forEach(node => (node.style.position = 'static'));
+    },
+    // Ignora explicitamente elementos marcados
+    ignoreElements: (el) => el.classList?.contains('nocapture'),
+  });
+
+  await salvarImagemAuto(canvas, nomeBase);
+  document.getElementById("icon-reset")?.classList.remove("disabled");
 }
+
+function sanitizeFileName(nome) {
+  return nome.replace(/[\/\\?%*:|"<>]/g, "_").trim();
+}
+
+// 1) Download automático p/ Downloads
+// 2) Tenta gravar silenciosamente no OPFS (armazenamento privado do site) — opcional
+async function salvarImagemAuto(canvas, nomeBase) {
+  return new Promise(resolve => {
+    canvas.toBlob(async (blob) => {
+      if (!blob) {
+        alert("❌ Erro ao gerar imagem.");
+        return resolve(false);
+      }
+
+      // --- (1) Download automático ---
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${nomeBase}.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      // --- (2) OPFS (persistente no site) ---
+      try {
+        if (navigator.storage && navigator.storage.getDirectory) {
+          const root = await navigator.storage.getDirectory();
+          const dir = await root.getDirectoryHandle("avaliacoes", { create: true });
+          const fileHandle = await dir.getFileHandle(`${nomeBase}.png`, { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+        }
+      } catch (e) {
+        // OPFS indisponível — ignore, já baixou
+      }
+
+      resolve(true);
+    }, "image/png", 1.0);
+  });
+}
+
+
+// }
 
 
 
@@ -1192,19 +1443,23 @@ function resetForm() {
     const avaliador = getAvaliador();
 
 
-    if (avaliador === "Emerson Palazzi") {
+    if (avaliador === "Eliane Humberg") {
         resetarUniformidadeInstrumental();
     }
 
     if (avaliador === "Antônio Carlos Schmidt") {
-        resetarMarchaGarbo();
+        resetarMarcha();
+    }
+
+    if (avaliador === "Felipe Sangali") {
+        resetarGarbo();
     }
 
     if (avaliador === "Airton Moreira") {
         resetarAlinhamento();
         atualizarSeletorBandas();
     }
-    if (avaliador === "Washington Souza") {
+    if (avaliador === "Celso Ribeiro") {
         resetarCobertura();
         atualizarSeletorBandas();
     }

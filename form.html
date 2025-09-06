@@ -13,15 +13,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Adicione no <head> ou antes do fechamento do <body> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
 
 </head>
 
 <body id="form-body">
     <div class="container-pai">
         <div id="container">
-            <img class="img-logo" src="img/LOGO_CAMPEONATOMS2025_smallnew_black.png" alt="">
+            <img class="img-logo" src="img/LOGO_ESTADUAL2025SP.png" alt="">
 
             <h2>Formulário de Avaliação</h2>
 
@@ -53,7 +54,7 @@
                 <button type="button" id="button-send" onclick="abrirModalConfirmacao(event)">Enviar Avaliação</button>
 
                 <div class="reset">
-                    <i onclick="printPDF()" id="icon-pdf" class="fa-solid fa-file-pdf disabled"></i>
+                    <i onclick="printPDF('png')" id="icon-pdf" class="fa-solid fa-file-pdf disabled"></i>
                     <i onclick="resetForm()" id="icon-reset" class="fa-solid fa-rotate-right disabled"></i>
                 </div>
             </form>

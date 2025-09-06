@@ -39,21 +39,23 @@ body {
     /* Faz a imagem ocupar toda a linha e permite o uso de margin auto */
     margin: 0 auto;
     /* Centraliza horizontalmente */
+    margin-top: -5%;
+    margin-bottom: -5%;
 }
 
 h2 {
     text-align: center;
     font-size: 30px;
-    color: #2f5182;
+    color: #2d2e2d;
 }
 
 h3 {
-    color: #2f5182;
+    color: #2d2e2d;
     text-align: center;
 }
 
 h4 {
-    color: #2f5182;
+    color: #2d2e2d;
     text-align: center;
     margin-bottom: 0px;
     font-size: 1.17em;
@@ -64,7 +66,7 @@ label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
-    color: #2f5182;
+    color: #192c45;
     font-size: 16px;
 }
 
@@ -127,7 +129,7 @@ select {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4e904d;
+    background-color: #736e21;
     color: white;
     border: none;
     border-radius: 4px;
@@ -138,7 +140,7 @@ button {
 }
 
 button:hover {
-    background-color: #397338;
+    background-color: #d4c606;
 }
 
 .reset {

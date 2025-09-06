@@ -300,6 +300,75 @@ button:hover {
 
 
 
+/* empilha as LINHAS do grid (sem scroll lateral) */
+.grid-checkboxes{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  width:100%;
+  overflow: visible !important;
+  box-sizing: border-box;
+  -webkit-user-select:none; user-select:none; -webkit-touch-callout:none;
+}
+
+/* linha do grid */
+.grid-checkboxes .grid-row{
+  display:flex;
+  flex-wrap: nowrap;
+  gap: 20%;
+  margin-bottom: 6px;
+}
+
+/* célula fixa, centralizada e sem “crescer” com borda */
+.grid-checkboxes .grid-row .cell{
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;       /* garante 24x24 sempre */
+  position: relative;
+}
+
+/* checkbox do grid NÃO herda input{width:95%} */
+.grid-checkboxes input[type="checkbox"]{
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  flex-shrink: 0;
+}
+
+/* visual do “buraco”: outline não muda o tamanho da célula */
+.grid-checkboxes .grid-row .cell.hole{
+  background:#eee;
+  outline: 1px dashed #999;     /* ↩️ outline no lugar de border */
+  border-radius:3px;
+  position:relative;
+}
+
+/* esconde o checkbox quando for buraco (evita “dupla borda”) */
+.grid-checkboxes .grid-row .cell.hole input[type="checkbox"]{
+  opacity: 0;
+  pointer-events: auto;
+}
+
+/* símbolo ∅ centralizado */
+.grid-checkboxes .grid-row .cell.hole::after{
+  content:"∅";
+  font-size:12px;
+  line-height:1;
+  color:#666;
+  position:absolute;
+}
+
+
+
+
+
+
+
+
+
 /* Estilo específico para o Avaliador BALIZA */
 #aspecto-baliza {
     width: 100%;

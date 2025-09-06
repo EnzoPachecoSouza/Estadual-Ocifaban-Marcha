@@ -560,8 +560,8 @@ function renderCoberturaGrid() {
 }
 
 function renderUniformidadeInstrumentalGrid() {
-    const linhas = parseInt(document.getElementById('linhas').value);
-    const colunas = parseInt(document.getElementById('colunas').value);
+    const colunas = parseInt(document.getElementById('linhas').value);
+    const linhas = parseInt(document.getElementById('colunas').value);
 
     if (isNaN(linhas) || isNaN(colunas) || linhas <= 0 || colunas <= 0) {
         alert('Informe um número válido de linhas e colunas.');
@@ -604,60 +604,193 @@ function renderGarboGrid() {
 }
 //-----------------------------------------------------------------------------------------------------------
 
+
+
+
+function toggleHole(checkbox, tipo) {
+    const cell = checkbox.parentElement;
+    const isHole = checkbox.dataset.hole === "true";
+    if (isHole) {
+        checkbox.dataset.hole = "false";
+        cell.classList.remove("hole");
+    } else {
+        checkbox.dataset.hole = "true";
+        checkbox.checked = false; // buraco nunca conta erro
+        cell.classList.add("hole");
+    }
+    contarSelecionados(tipo); // recalc nota/erros
+}
+
+
+
+
+
 function gerarGrid(tipo, linhas, colunas) {
+    // const gridContainer = document.getElementById(`${tipo}-grid`);
+    // gridContainer.innerHTML = '';
+
+    // for (let i = 0; i < linhas; i++) {
+    //     const row = document.createElement('div');
+    //     row.style.display = 'flex';
+    //     row.style.marginBottom = '5px';
+
+    //     for (let j = 0; j < colunas; j++) {
+    //         const checkbox = document.createElement('input');
+    //         checkbox.type = 'checkbox';
+    //         checkbox.style.marginRight = '5px';
+    //         checkbox.addEventListener('change', () => { // 'change' detecta marcar ou desmarcar
+    //             contarSelecionados(tipo);
+    //         });
+
+    //         row.appendChild(checkbox);
+    //     }
+
+    //     gridContainer.appendChild(row);
+    // }
     const gridContainer = document.getElementById(`${tipo}-grid`);
     gridContainer.innerHTML = '';
 
     for (let i = 0; i < linhas; i++) {
         const row = document.createElement('div');
-        row.style.display = 'flex';
-        row.style.marginBottom = '5px';
+        row.className = 'grid-row';
 
         for (let j = 0; j < colunas; j++) {
+            const cell = document.createElement('span');
+            cell.className = 'cell';
+
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.style.marginRight = '5px';
-            checkbox.addEventListener('change', () => { // 'change' detecta marcar ou desmarcar
-                contarSelecionados(tipo);
+            checkbox.dataset.hole = 'false'; // padrão: avaliável
+
+            // ----- long-press (mobile) -----
+            let pressTimer = null;
+            let suppressNextClick = false;
+
+            const startPress = () => {
+                clearTimeout(pressTimer);
+                pressTimer = setTimeout(() => {
+                    suppressNextClick = true;     // evita o click normal depois do long-press
+                    toggleHole(checkbox, tipo);
+                }, 500); // 0,5s
+            };
+            const endPress = () => clearTimeout(pressTimer);
+
+            // pointer events cobrem mouse e toque
+            cell.addEventListener('pointerdown', startPress);
+            cell.addEventListener('pointerup', endPress);
+            cell.addEventListener('pointerleave', endPress);
+            cell.addEventListener('pointercancel', endPress);
+
+            // clique normal
+            checkbox.addEventListener('click', (e) => {
+                if (suppressNextClick) { e.preventDefault(); suppressNextClick = false; return; }
+                if (e.shiftKey) { e.preventDefault(); toggleHole(checkbox, tipo); return; }
+                if (checkbox.dataset.hole === 'true') {
+                    e.preventDefault();
+                    toggleHole(checkbox, tipo);   // <- clicar no buraco DESMARCA o buraco
+                    return;
+                }
+                if (e.shiftKey) {               // desktop: shift+click -> buraco
+                    e.preventDefault();
+                    toggleHole(checkbox, tipo);
+                    return;
+                }
+                if (checkbox.dataset.hole === 'true') {
+                    e.preventDefault();           // buraco não marca erro
+                    return;
+                }
             });
 
-            row.appendChild(checkbox);
+            // botão direito (desktop) -> buraco
+            checkbox.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                toggleHole(checkbox, tipo);
+            });
+
+            // marcar/desmarcar erro -> recalcula
+            checkbox.addEventListener('change', () => contarSelecionados(tipo));
+
+            cell.appendChild(checkbox);
+            row.appendChild(cell);
         }
 
         gridContainer.appendChild(row);
     }
+
+    contarSelecionados(tipo); // zera contagem ao criar
 }
 
 function contarSelecionados(tipo) {
+    // const checkboxes = document.querySelectorAll(`#${tipo}-grid input[type="checkbox"]`);
+    // let selecionados = 0;
+
+    // checkboxes.forEach(checkbox => {
+    //     if (checkbox.checked) {
+    //         selecionados++;
+    //     }
+    // });
+
+    // // Atualiza quantidade de erros
+    // document.getElementById(`${tipo}-erros`).innerText = selecionados;
+
+    // // Calcula a nota: 5 - (0.10 * quantidade de erros)
+    // let nota = 10 - (selecionados * 0.10);
+    // if (nota < 0) nota = 0;
+
+    // // Atualiza a nota visualmente
+    // if (tipo === 'garbo') {
+    //     document.getElementById('notaGarbo').innerText = nota.toFixed(2);
+    //     document.getElementById('inputGarbo').value = nota.toFixed(2); // Atualiza o campo oculto
+    // } else if (tipo === 'marcha') {
+    //     document.getElementById('notaMarcha').innerText = nota.toFixed(2);
+    //     document.getElementById('inputMarcha').value = nota.toFixed(2); // Atualiza o campo oculto
+    // } else if (tipo === 'alinhamento') {
+    //     document.getElementById('notaAlinhamento').innerText = nota.toFixed(2);
+    //     document.getElementById('inputAlinhamento').value = nota.toFixed(2); // Atualiza o campo oculto
+    // } else if (tipo === 'cobertura') {
+    //     document.getElementById('notaCobertura').innerText = nota.toFixed(2);
+    //     document.getElementById('inputCobertura').value = nota.toFixed(2); // Atualiza o campo oculto
+    // } else if (tipo === 'uniformidade') {
+    //     document.getElementById('notaUniformidade').innerText = nota.toFixed(2);
+    //     document.getElementById('inputUniformidade').value = nota.toFixed(2);
+    // } else if (tipo === 'instrumental') {
+    //     document.getElementById('notaInstrumental').innerText = nota.toFixed(2);
+    //     document.getElementById('inputInstrumental').value = nota.toFixed(2);
+    // }
+
+
+    // // Desabilita checkboxes se a nota chegar a 5
+    // checkboxes.forEach(checkbox => {
+    //     if (!checkbox.checked) {
+    //         checkbox.disabled = nota <= 0;
+    //     }
+    // });
     const checkboxes = document.querySelectorAll(`#${tipo}-grid input[type="checkbox"]`);
     let selecionados = 0;
 
     checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
+        if (checkbox.checked && checkbox.dataset.hole !== "true") {
             selecionados++;
         }
     });
 
-    // Atualiza quantidade de erros
     document.getElementById(`${tipo}-erros`).innerText = selecionados;
 
-    // Calcula a nota: 5 - (0.10 * quantidade de erros)
     let nota = 10 - (selecionados * 0.10);
     if (nota < 0) nota = 0;
 
-    // Atualiza a nota visualmente
     if (tipo === 'garbo') {
         document.getElementById('notaGarbo').innerText = nota.toFixed(2);
-        document.getElementById('inputGarbo').value = nota.toFixed(2); // Atualiza o campo oculto
+        document.getElementById('inputGarbo').value = nota.toFixed(2);
     } else if (tipo === 'marcha') {
         document.getElementById('notaMarcha').innerText = nota.toFixed(2);
-        document.getElementById('inputMarcha').value = nota.toFixed(2); // Atualiza o campo oculto
+        document.getElementById('inputMarcha').value = nota.toFixed(2);
     } else if (tipo === 'alinhamento') {
         document.getElementById('notaAlinhamento').innerText = nota.toFixed(2);
-        document.getElementById('inputAlinhamento').value = nota.toFixed(2); // Atualiza o campo oculto
+        document.getElementById('inputAlinhamento').value = nota.toFixed(2);
     } else if (tipo === 'cobertura') {
         document.getElementById('notaCobertura').innerText = nota.toFixed(2);
-        document.getElementById('inputCobertura').value = nota.toFixed(2); // Atualiza o campo oculto
+        document.getElementById('inputCobertura').value = nota.toFixed(2);
     } else if (tipo === 'uniformidade') {
         document.getElementById('notaUniformidade').innerText = nota.toFixed(2);
         document.getElementById('inputUniformidade').value = nota.toFixed(2);
@@ -666,11 +799,12 @@ function contarSelecionados(tipo) {
         document.getElementById('inputInstrumental').value = nota.toFixed(2);
     }
 
-
-    // Desabilita checkboxes se a nota chegar a 5
+    // desabilita só os não-buracos quando a nota zerar
     checkboxes.forEach(checkbox => {
-        if (!checkbox.checked) {
-            checkbox.disabled = nota <= 0;
+        if (checkbox.dataset.hole === "true") {
+            checkbox.disabled = false; // buracos sempre podem ser desmarcados
+        } else {
+            checkbox.disabled = (!checkbox.checked && nota <= 0);
         }
     });
 }
@@ -1095,7 +1229,7 @@ function enviarAvaliacao() {
                 let valor = valorNormalizado === "" ? NaN : parseFloat(valorNormalizado);
 
                 // Validação específica dos técnicos
-                if (["Edmilson Chiquinho", "Marcelo Bambam", "Marco Almeida Jr. ", "Jorge Scheffer","Hércules Alves", "Luiz Caldana", "Eliane Humberg", "Bruno Machado"].includes(avaliador)) {
+                if (["Edmilson Chiquinho", "Marcelo Bambam", "Marco Almeida Jr. ", "Jorge Scheffer", "Hércules Alves", "Luiz Caldana", "Eliane Humberg", "Bruno Machado"].includes(avaliador)) {
                     // Checagem de casas decimais (máx. 2)
                     if (valorNormalizado.includes('.')) {
                         const casasDecimais = (valorNormalizado.split('.')[1] || "");
@@ -1293,141 +1427,141 @@ function habibilitarCampos() {
 
 // // Função para gerar PDF
 // function printPDF() {
-    // if (document.getElementById("icon-pdf").classList.contains("disabled")) {
-    //     alert("⚠️ Você precisa enviar a avaliação primeiro!");
-    //     return;
-    // }
+// if (document.getElementById("icon-pdf").classList.contains("disabled")) {
+//     alert("⚠️ Você precisa enviar a avaliação primeiro!");
+//     return;
+// }
 
-    // window.print();
+// window.print();
 
-    // // Habilita o botão de reset após gerar o PDF
-    // document.getElementById("icon-reset").classList.remove("disabled");
+// // Habilita o botão de reset após gerar o PDF
+// document.getElementById("icon-reset").classList.remove("disabled");
 
 
 const SELETOR_ALVO_CAPTURA = ".container-pai"; // mude se necessário
 
 async function printPDF(formatoPreferido = 'png') {
-  if (document.getElementById("icon-pdf").classList.contains("disabled")) {
-    alert("⚠️ Você precisa enviar a avaliação primeiro!");
-    return;
-  }
-  const avaliador = getAvaliador();
-  const corporacao = document.getElementById("corporacao")?.value || "";
-  if (!avaliador || !corporacao) {
-    alert("⚠️ Preencha Avaliador e Corporação antes de gerar.");
-    return;
-  }
-  const nomeBase = sanitizeFileName(`${corporacao} - ${avaliador}`);
+    if (document.getElementById("icon-pdf").classList.contains("disabled")) {
+        alert("⚠️ Você precisa enviar a avaliação primeiro!");
+        return;
+    }
+    const avaliador = getAvaliador();
+    const corporacao = document.getElementById("corporacao")?.value || "";
+    if (!avaliador || !corporacao) {
+        alert("⚠️ Preencha Avaliador e Corporação antes de gerar.");
+        return;
+    }
+    const nomeBase = sanitizeFileName(`${corporacao} - ${avaliador}`);
 
-  // alvo da captura (use "body" se quiser a página inteira)
-  const alvo = document.querySelector(SELETOR_ALVO_CAPTURA) || document.body;
-  if (!alvo) {
-    alert("⚠️ Não encontrei o elemento da avaliação para capturar.");
-    return;
-  }
+    // alvo da captura (use "body" se quiser a página inteira)
+    const alvo = document.querySelector(SELETOR_ALVO_CAPTURA) || document.body;
+    if (!alvo) {
+        alert("⚠️ Não encontrei o elemento da avaliação para capturar.");
+        return;
+    }
 
-  // Dimensões REAIS do conteúdo (inclui o que está fora da viewport)
-  const pageWidth = Math.max(
-    alvo.scrollWidth,
-    document.documentElement.scrollWidth,
-    document.body.scrollWidth,
-    window.innerWidth
-  );
-  const pageHeight = Math.max(
-    alvo.scrollHeight,
-    document.documentElement.scrollHeight,
-    document.body.scrollHeight,
-    window.innerHeight
-  );
+    // Dimensões REAIS do conteúdo (inclui o que está fora da viewport)
+    const pageWidth = Math.max(
+        alvo.scrollWidth,
+        document.documentElement.scrollWidth,
+        document.body.scrollWidth,
+        window.innerWidth
+    );
+    const pageHeight = Math.max(
+        alvo.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        window.innerHeight
+    );
 
-  // Escala segura (aumente/diminua conforme a necessidade/performace)
-  const baseScale = Math.min(window.devicePixelRatio || 2, 3);
+    // Escala segura (aumente/diminua conforme a necessidade/performace)
+    const baseScale = Math.min(window.devicePixelRatio || 2, 3);
 
-  const canvas = await html2canvas(alvo, {
-    backgroundColor: "#ffffff",
-    useCORS: true,
-    scrollX: 0,
-    scrollY: 0,
-    windowWidth: pageWidth,
-    windowHeight: pageHeight,
-    scale: baseScale,
-    // Ajustes no DOM clonado para evitar cortes
-    onclone: (doc) => {
-      const el = doc.querySelector(SELETOR_ALVO_CAPTURA) || doc.body;
+    const canvas = await html2canvas(alvo, {
+        backgroundColor: "#ffffff",
+        useCORS: true,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: pageWidth,
+        windowHeight: pageHeight,
+        scale: baseScale,
+        // Ajustes no DOM clonado para evitar cortes
+        onclone: (doc) => {
+            const el = doc.querySelector(SELETOR_ALVO_CAPTURA) || doc.body;
 
-      // Remover limites que possam cortar o conteúdo
-      el.style.overflow = "visible";
-      el.style.height = "auto";
-      el.style.maxHeight = "none";
-      el.style.maxWidth = "none";
+            // Remover limites que possam cortar o conteúdo
+            el.style.overflow = "visible";
+            el.style.height = "auto";
+            el.style.maxHeight = "none";
+            el.style.maxWidth = "none";
 
-      // Desativar transforms que às vezes causam clipping
-      el.style.transform = "none";
+            // Desativar transforms que às vezes causam clipping
+            el.style.transform = "none";
 
-      // Se houver wrappers/containers que limitam altura/overflow, libere-os também:
-      // doc.querySelectorAll('.wrapper, .content, #formulario').forEach(node => {
-      //   node.style.overflow = "visible";
-      //   node.style.height = "auto";
-      //   node.style.maxHeight = "none";
-      //   node.style.transform = "none";
-      // });
+            // Se houver wrappers/containers que limitam altura/overflow, libere-os também:
+            // doc.querySelectorAll('.wrapper, .content, #formulario').forEach(node => {
+            //   node.style.overflow = "visible";
+            //   node.style.height = "auto";
+            //   node.style.maxHeight = "none";
+            //   node.style.transform = "none";
+            // });
 
-      // Opcional: esconda elementos que não devem sair na imagem (ex.: botões)
-      // Basta adicionar class="nocapture" neles no seu HTML/CSS
-      doc.querySelectorAll('.nocapture').forEach(node => (node.style.display = 'none'));
+            // Opcional: esconda elementos que não devem sair na imagem (ex.: botões)
+            // Basta adicionar class="nocapture" neles no seu HTML/CSS
+            doc.querySelectorAll('.nocapture').forEach(node => (node.style.display = 'none'));
 
-      // Opcional: elementos fixos/sticky podem sobrepor; torne-os estáticos na captura
-      doc.querySelectorAll('.fixed, .sticky').forEach(node => (node.style.position = 'static'));
-    },
-    // Ignora explicitamente elementos marcados
-    ignoreElements: (el) => el.classList?.contains('nocapture'),
-  });
+            // Opcional: elementos fixos/sticky podem sobrepor; torne-os estáticos na captura
+            doc.querySelectorAll('.fixed, .sticky').forEach(node => (node.style.position = 'static'));
+        },
+        // Ignora explicitamente elementos marcados
+        ignoreElements: (el) => el.classList?.contains('nocapture'),
+    });
 
-  await salvarImagemAuto(canvas, nomeBase);
-  document.getElementById("icon-reset")?.classList.remove("disabled");
+    await salvarImagemAuto(canvas, nomeBase);
+    document.getElementById("icon-reset")?.classList.remove("disabled");
 }
 
 function sanitizeFileName(nome) {
-  return nome.replace(/[\/\\?%*:|"<>]/g, "_").trim();
+    return nome.replace(/[\/\\?%*:|"<>]/g, "_").trim();
 }
 
 // 1) Download automático p/ Downloads
 // 2) Tenta gravar silenciosamente no OPFS (armazenamento privado do site) — opcional
 async function salvarImagemAuto(canvas, nomeBase) {
-  return new Promise(resolve => {
-    canvas.toBlob(async (blob) => {
-      if (!blob) {
-        alert("❌ Erro ao gerar imagem.");
-        return resolve(false);
-      }
+    return new Promise(resolve => {
+        canvas.toBlob(async (blob) => {
+            if (!blob) {
+                alert("❌ Erro ao gerar imagem.");
+                return resolve(false);
+            }
 
-      // --- (1) Download automático ---
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${nomeBase}.png`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+            // --- (1) Download automático ---
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${nomeBase}.png`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
 
-      // --- (2) OPFS (persistente no site) ---
-      try {
-        if (navigator.storage && navigator.storage.getDirectory) {
-          const root = await navigator.storage.getDirectory();
-          const dir = await root.getDirectoryHandle("avaliacoes", { create: true });
-          const fileHandle = await dir.getFileHandle(`${nomeBase}.png`, { create: true });
-          const writable = await fileHandle.createWritable();
-          await writable.write(blob);
-          await writable.close();
-        }
-      } catch (e) {
-        // OPFS indisponível — ignore, já baixou
-      }
+            // --- (2) OPFS (persistente no site) ---
+            try {
+                if (navigator.storage && navigator.storage.getDirectory) {
+                    const root = await navigator.storage.getDirectory();
+                    const dir = await root.getDirectoryHandle("avaliacoes", { create: true });
+                    const fileHandle = await dir.getFileHandle(`${nomeBase}.png`, { create: true });
+                    const writable = await fileHandle.createWritable();
+                    await writable.write(blob);
+                    await writable.close();
+                }
+            } catch (e) {
+                // OPFS indisponível — ignore, já baixou
+            }
 
-      resolve(true);
-    }, "image/png", 1.0);
-  });
+            resolve(true);
+        }, "image/png", 1.0);
+    });
 }
 
 

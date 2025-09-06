@@ -534,8 +534,8 @@ function atualizarFormulario() {
 
 //-----------------------------------------------------------------------------------------------------------
 function renderAlinhamentoGrid() {
-    const linhas = parseInt(document.getElementById('linhas').value);
-    const colunas = parseInt(document.getElementById('colunas').value);
+    const colunas = parseInt(document.getElementById('linhas').value);
+    const linhas = parseInt(document.getElementById('colunas').value);
 
     if (isNaN(linhas) || isNaN(colunas) || linhas <= 0 || colunas <= 0) {
         alert('Informe um número válido de linhas e colunas.');
@@ -547,8 +547,8 @@ function renderAlinhamentoGrid() {
 }
 
 function renderCoberturaGrid() {
-    const linhas = parseInt(document.getElementById('linhas').value);
-    const colunas = parseInt(document.getElementById('colunas').value);
+    const colunas = parseInt(document.getElementById('linhas').value);
+    const linhas = parseInt(document.getElementById('colunas').value);
 
     if (isNaN(linhas) || isNaN(colunas) || linhas <= 0 || colunas <= 0) {
         alert('Informe um número válido de linhas e colunas.');
@@ -576,8 +576,8 @@ function renderUniformidadeInstrumentalGrid() {
 }
 
 function renderMarchaGrid() {
-    const linhas = parseInt(document.getElementById('linhas').value);
-    const colunas = parseInt(document.getElementById('colunas').value);
+    const colunas = parseInt(document.getElementById('linhas').value);
+    const linhas = parseInt(document.getElementById('colunas').value);
 
     if (isNaN(linhas) || isNaN(colunas) || linhas <= 0 || colunas <= 0) {
         alert('Informe um número válido de linhas e colunas.');
@@ -590,8 +590,8 @@ function renderMarchaGrid() {
 }
 
 function renderGarboGrid() {
-    const linhas = parseInt(document.getElementById('linhas').value);
-    const colunas = parseInt(document.getElementById('colunas').value);
+    const colunas = parseInt(document.getElementById('linhas').value);
+    const linhas = parseInt(document.getElementById('colunas').value);
 
     if (isNaN(linhas) || isNaN(colunas) || linhas <= 0 || colunas <= 0) {
         alert('Informe um número válido de linhas e colunas.');
@@ -608,17 +608,34 @@ function renderGarboGrid() {
 
 
 function toggleHole(checkbox, tipo) {
+    // const cell = checkbox.parentElement;
+    // const isHole = checkbox.dataset.hole === "true";
+    // if (isHole) {
+    //     checkbox.dataset.hole = "false";
+    //     cell.classList.remove("hole");
+    // } else {
+    //     checkbox.dataset.hole = "true";
+    //     checkbox.checked = false; // buraco nunca conta erro
+    //     cell.classList.add("hole");
+    // }
+    // contarSelecionados(tipo); // recalc nota/erros
+
     const cell = checkbox.parentElement;
     const isHole = checkbox.dataset.hole === "true";
+
     if (isHole) {
+        // saindo do buraco → volta a ser normal (vazio)
         checkbox.dataset.hole = "false";
         cell.classList.remove("hole");
+        checkbox.checked = false;    // garante vazio
     } else {
+        // entrando em buraco → nunca conta erro
         checkbox.dataset.hole = "true";
-        checkbox.checked = false; // buraco nunca conta erro
         cell.classList.add("hole");
+        checkbox.checked = false;    // garante vazio
     }
-    contarSelecionados(tipo); // recalc nota/erros
+
+    contarSelecionados(tipo);      // recalcula nota/erros na hora
 }
 
 
@@ -662,53 +679,57 @@ function gerarGrid(tipo, linhas, colunas) {
             checkbox.type = 'checkbox';
             checkbox.dataset.hole = 'false'; // padrão: avaliável
 
-            // ----- long-press (mobile) -----
+            // --- suporte a long-press (mobile) ---
             let pressTimer = null;
             let suppressNextClick = false;
 
             const startPress = () => {
                 clearTimeout(pressTimer);
                 pressTimer = setTimeout(() => {
-                    suppressNextClick = true;     // evita o click normal depois do long-press
-                    toggleHole(checkbox, tipo);
-                }, 500); // 0,5s
+                    suppressNextClick = true;   // evita o clique normal depois do long-press
+                    toggleHole(checkbox, tipo); // marca buraco
+                }, 500);
             };
             const endPress = () => clearTimeout(pressTimer);
 
-            // pointer events cobrem mouse e toque
             cell.addEventListener('pointerdown', startPress);
             cell.addEventListener('pointerup', endPress);
             cell.addEventListener('pointerleave', endPress);
             cell.addEventListener('pointercancel', endPress);
 
-            // clique normal
+            // --- CLICK: único handler ---
             checkbox.addEventListener('click', (e) => {
-                if (suppressNextClick) { e.preventDefault(); suppressNextClick = false; return; }
-                if (e.shiftKey) { e.preventDefault(); toggleHole(checkbox, tipo); return; }
-                if (checkbox.dataset.hole === 'true') {
+                if (suppressNextClick) {
                     e.preventDefault();
-                    toggleHole(checkbox, tipo);   // <- clicar no buraco DESMARCA o buraco
+                    suppressNextClick = false;
                     return;
                 }
-                if (e.shiftKey) {               // desktop: shift+click -> buraco
+                if (e.shiftKey) {             // desktop: Shift+clique = buraco
                     e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
                     toggleHole(checkbox, tipo);
                     return;
                 }
                 if (checkbox.dataset.hole === 'true') {
-                    e.preventDefault();           // buraco não marca erro
+                    // clicar no buraco apenas remove o buraco; não vira “erro”
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    toggleHole(checkbox, tipo);
                     return;
                 }
+                // clique normal segue (marca/desmarca erro)
             });
 
-            // botão direito (desktop) -> buraco
-            checkbox.addEventListener('contextmenu', (e) => {
-                e.preventDefault();
-                toggleHole(checkbox, tipo);
+            // --- CHANGE: ignore mudanças vindas do toggleHole e de buraco ---
+            checkbox.addEventListener('change', () => {
+                // se for buraco, nunca conta erro
+                if (checkbox.dataset.hole === 'true') return;
+                contarSelecionados(tipo);
             });
 
-            // marcar/desmarcar erro -> recalcula
-            checkbox.addEventListener('change', () => contarSelecionados(tipo));
+
 
             cell.appendChild(checkbox);
             row.appendChild(cell);
@@ -800,11 +821,17 @@ function contarSelecionados(tipo) {
     }
 
     // desabilita só os não-buracos quando a nota zerar
+    // checkboxes.forEach(checkbox => {
+    //     if (checkbox.dataset.hole === "true") {
+    //         checkbox.disabled = false; // buracos sempre podem ser desmarcados
+    //     } else {
+    //         checkbox.disabled = (!checkbox.checked && nota <= 0);
+    //     }
+    // });
+    // ✅ soma apenas marcados que NÃO são buraco
     checkboxes.forEach(checkbox => {
-        if (checkbox.dataset.hole === "true") {
-            checkbox.disabled = false; // buracos sempre podem ser desmarcados
-        } else {
-            checkbox.disabled = (!checkbox.checked && nota <= 0);
+        if (checkbox.checked && checkbox.dataset.hole !== "true") {
+            selecionados++;
         }
     });
 }

@@ -59,11 +59,6 @@ function atualizarFormulario() {
         quesitos = ["Uniformidade", "Instrumental"];
     }
 
-    // else if (avaliador === "Antônio Carlos Schmidt") {
-    //     aspecto = "Aspecto Marcha e Garbo";
-    //     quesitos = ["Marcha", "Garbo"];
-    // }
-
     else if (avaliador === "Antônio Carlos Schmidt") {
         aspecto = "Aspecto Marcha";
         quesitos = ["Marcha"];
@@ -116,14 +111,29 @@ function atualizarFormulario() {
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    else if (avaliador === "Bruno Machado") {
-        aspecto = "Aspecto Corpo Coreográfico";
-        quesitos = ["Criatividade", "Dificuldade Técnica", "Sincronismo", "Formação", "Evolução", "Ritmo", "Marcha", "Garbo", "Alinhamento", "Uniformidade"];
+    else if (avaliador === "Vanessa Vialta") {
+        aspecto = "Aspecto Pelotão Cívico";
+        quesitos = ["Uniformidade", "Marcha", "Garbo", "Alinhamento/Cobertura", "Deslocamento", "Conversão/Posicionamento"];
     }
 
-    else if (avaliador === "Baliza") {
+    else if (avaliador === "Eduardo Caetano") {
+        aspecto = "Aspecto Artístico";
+        quesitos = ["Entrada", "Composição Coreográfica", "Evolução", "Formação", "Expressão e Garbo"];
+    }
+
+    else if (avaliador === "Débora Elizabeth") {
+        aspecto = "Aspecto Técnico";
+        quesitos = ["Sincronismo", "Ritmo", "Marcha", "Uniformidade", "Execução Coreográfica"];
+    }
+
+    else if (avaliador === "Joseph Araújo" || avaliador === "Karen Lavínia") {
         aspecto = "Aspecto Baliza";
-        quesitos = ["Coreografia", "Movimentos Acrobáticos", "Elementos", "Manuseio do Bastão", "Garbo", "Marcha", "Comunicação com o Público", "Uniformidade"];
+        quesitos = ["Manuseio do Bastão", "Performance de Entrada", "Coreografia", "Dança", "Movimentos Acrobáticos", "Elementos", "Uniforme"];
+    }
+
+    else if (avaliador === "Theo Ribeiro") {
+        aspecto = "Aspecto Mor";
+        quesitos = ["Comando de Batão/Mace/Espada", "Comando de Voz/Apito", "Condução da Corporação", "Marcha", "Garbo", "Uniformidade"];
     }
 
     //---------------------------------------------------------------------------------------------------------------------
@@ -138,13 +148,80 @@ function atualizarFormulario() {
         });
     }
 
-    if (aspecto === "Aspecto Baliza" || aspecto === "Aspecto Corpo Coreográfico") {
+    if (aspecto === "Aspecto Técnico" || aspecto === "Aspecto Artístico") {
         aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
-        quesitos.forEach((q, index) => {
+
+        // Quesito 1: SELECT Existente/Inexistente
+        quesitosDiv.innerHTML += `
+        <label for="quesito1">Corpo Coreográfico</label>
+        <select id="quesito1" name="quesito1" onchange="handleTecArtExistenteChange()" required>
+            <option value="">Selecione</option>
+            <option value="Existente">Existente</option>
+            <option value="Inexistente">Inexistente</option>
+        </select><br>
+    `;
+
+        // Demais quesitos numéricos começam no quesito2
+        quesitos.forEach((q, i) => {
+            const idx = i + 2; // 2..n
             quesitosDiv.innerHTML += `
-                <label for="quesito${index + 1}">${q}:</label>
-                <input type="number" step="0.2" id="quesito${index + 1}" name="quesito${index + 1}" min="0" max="10" placeholder="De 0,00 até 10,00" required><br>
-            `;
+            <label for="quesito${idx}">${q}:</label>
+            <input type="number" step="0.2" id="quesito${idx}" name="quesito${idx}"
+                   min="0" max="10" placeholder="De 0,00 até 10,00" required><br>
+        `;
+        });
+    }
+
+    if (aspecto === "Aspecto Mor") {
+        aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
+
+        // Quesito 1: SELECT Existente/Inexistente
+        quesitosDiv.innerHTML += `
+        <label for="quesito1">Mor</label>
+        <select id="quesito1" name="quesito1" onchange="handleMorExistenteChange()" required>
+            <option value="">Selecione</option>
+            <option value="Existente">Existente</option>
+            <option value="Inexistente">Inexistente</option>
+        </select><br>
+    `;
+
+        // Demais quesitos numéricos começam no quesito2
+        quesitos.forEach((q, i) => {
+            const idx = i + 2; // 2..n
+            quesitosDiv.innerHTML += `
+            <label for="quesito${idx}">${q}:</label>
+            <input type="number" step="0.2" id="quesito${idx}" name="quesito${idx}"
+                   min="0" max="10" placeholder="De 0,00 até 10,00" required><br>
+        `;
+        });
+    }
+
+
+
+
+    if (aspecto === "Aspecto Baliza") {
+        aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
+
+        // Quesito 1: SELECT Baliza
+        quesitosDiv.innerHTML += `
+        <label for="quesito1">Baliza:</label>
+        <select id="quesito1" name="quesito1" onchange="handleBalizaTipoChange()" required>
+            <option value="">Selecione</option>
+            <option value="Feminina">Feminina</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Trans">Trans</option>
+            <option value="Inexistente">Inexistente</option>
+        </select><br>
+    `;
+
+        // Demais quesitos: começam no quesito2
+        quesitos.forEach((q, i) => {
+            const idx = i + 2; // começa no 2
+            quesitosDiv.innerHTML += `
+            <label for="quesito${idx}">${q}:</label>
+            <input type="number" step="0.2" id="quesito${idx}" name="quesito${idx}"
+                   min="0" max="10" placeholder="De 0,00 até 10,00" required><br>
+        `;
         });
     }
 
@@ -835,6 +912,100 @@ function contarSelecionados(tipo) {
         }
     });
 }
+
+function handleBalizaTipoChange() {
+    const tipo = document.getElementById("quesito1").value; // Feminina, Masculino, Trans, Inexistente
+    // Seleciona só os inputs numéricos deste aspecto (quesito2+)
+    const inputsNumericos = Array.from(document.querySelectorAll('#quesitos input[type="number"][id^="quesito"]'))
+        .filter(inp => {
+            const n = parseInt(inp.id.replace("quesito", ""), 10);
+            return !isNaN(n) && n >= 2;
+        });
+
+    if (tipo === "Inexistente") {
+        // Zera e desabilita
+        inputsNumericos.forEach(inp => {
+            inp.value = "0.00";
+            inp.disabled = true;
+            inp.classList.add("disabled");
+        });
+    } else if (tipo === "Feminina" || tipo === "Masculino" || tipo === "Trans") {
+        // Habilita normalmente
+        inputsNumericos.forEach(inp => {
+            inp.disabled = false;
+            inp.classList.remove("disabled");
+            // não mexe no valor; o avaliador preenche
+        });
+    } else {
+        // Sem seleção: habilita, mas limpa os valores para evitar confusão
+        inputsNumericos.forEach(inp => {
+            inp.disabled = false;
+            inp.classList.remove("disabled");
+            inp.value = "";
+        });
+    }
+}
+
+function handleTecArtExistenteChange() {
+    const valor = document.getElementById("quesito1").value; // Existente | Inexistente
+    const inputsNumericos = Array.from(
+        document.querySelectorAll('#quesitos input[type="number"][id^="quesito"]')
+    ).filter(inp => {
+        const n = parseInt(inp.id.replace("quesito", ""), 10);
+        return !isNaN(n) && n >= 2; // só quesito2+
+    });
+
+    if (valor === "Inexistente") {
+        inputsNumericos.forEach(inp => {
+            inp.value = "0.00";
+            inp.disabled = true;
+            inp.classList.add("disabled");
+        });
+    } else if (valor === "Existente") {
+        inputsNumericos.forEach(inp => {
+            inp.disabled = false;
+            inp.classList.remove("disabled");
+        });
+    } else {
+        inputsNumericos.forEach(inp => {
+            inp.disabled = false;
+            inp.classList.remove("disabled");
+            inp.value = "";
+        });
+    }
+}
+
+function handleMorExistenteChange() {
+    const valor = document.getElementById("quesito1").value; // Existente | Inexistente
+    const inputsNumericos = Array.from(
+        document.querySelectorAll('#quesitos input[type="number"][id^="quesito"]')
+    ).filter(inp => {
+        const n = parseInt(inp.id.replace("quesito", ""), 10);
+        return !isNaN(n) && n >= 2; // só quesito2+
+    });
+
+    if (valor === "Inexistente") {
+        inputsNumericos.forEach(inp => {
+            inp.value = "0.00";
+            inp.disabled = true;
+            inp.classList.add("disabled");
+        });
+    } else if (valor === "Existente") {
+        inputsNumericos.forEach(inp => {
+            inp.disabled = false;
+            inp.classList.remove("disabled");
+        });
+    } else {
+        inputsNumericos.forEach(inp => {
+            inp.disabled = false;
+            inp.classList.remove("disabled");
+            inp.value = "";
+        });
+    }
+}
+
+
+
 
 function resetarAlinhamento() {
     document.getElementById('notaAlinhamento').innerText = '10.00';

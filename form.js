@@ -1602,12 +1602,11 @@ function atualizarSeletorBandas() {
 }
 
 const bandasDisponiveis = [
-    "34 • Banda Municipal de Rio Verde de MT",
-    "35 • Banda Municipal de Bonito ",
-    "36 • Banda do Colégio Bionatus – Campo Grande",
-    "37 • Banda Municipal de Bataguassu",
-    "38 • Banda Municipal de Naviraí",
-    "39 • Banda Municipal de Selvíria"
+    "01 • Banda A",
+    "02 • Banda B",
+    "03 • Banda C",
+    "04 • Banda D",
+    "05 • Banda E"
 ];
 
 

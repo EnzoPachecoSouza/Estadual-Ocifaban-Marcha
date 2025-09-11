@@ -15,9 +15,9 @@ body {
 }
 
 @supports (-webkit-touch-callout: none) {
-  body {
-    min-height: -webkit-fill-available;
-  }
+    body {
+        min-height: -webkit-fill-available;
+    }
 }
 
 .img-avaliaAi {
@@ -85,9 +85,11 @@ button:hover {
 }
 
 .img-logo {
-    width: 45%;
-    height: 45%;
+    width: 50%;
+    height: 50%;
     text-align: center;
+    margin-bottom: -5%;
+    margin-top: -5%;
 }
 
 .termo_veracidade {
@@ -148,9 +150,11 @@ button:hover {
     }
 
     .img-logo {
-        width: 40%;
-        height: 38%;
+        width: 45%;
+        height: 45%;
         text-align: center;
+        margin-bottom: -5%;
+        margin-top: -5%;
     }
 
     .img-prefeitura {
@@ -189,8 +193,10 @@ button:hover {
     }
 
     .img-logo {
-        width: 42%;
-        height: 34%;
+        width: 44%;
+        height: 40%;
+        margin-bottom: -5%;
+        margin-top: -5%;
     }
 
     .img-prefeitura {
@@ -228,8 +234,10 @@ button:hover {
     }
 
     .img-logo {
-        width: 38%;
-        height: 28%;
+        width: 48%;
+        height: 38%;
+        margin-bottom: -5%;
+        margin-top: -5%;
     }
 
     .img-prefeitura {
@@ -268,7 +276,9 @@ button:hover {
 
     .img-logo {
         width: 30%;
-        height: 19%;
+        height: 28%;
+        margin-bottom: -5%;
+        margin-top: -5%;
     }
 
     .img-prefeitura {

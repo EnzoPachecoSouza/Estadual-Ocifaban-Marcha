@@ -28,11 +28,15 @@ function atualizarFormulario() {
     console.log("atualizou");
 
     //-----------------------------------------------------------------------------------------------------------------
-    if (avaliador === "Edmilson Chiquinho") {
+    if (avaliador === "Paulo Baptista") {
         aspecto = "Aspecto Sopros";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
     }
     else if (avaliador === "Marcelo Bambam") {
+        aspecto = "Aspecto Sopros";
+        quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
+    }
+    else if (avaliador === "Felipe Sangali 2") {
         aspecto = "Aspecto Sopros";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
     }
@@ -49,6 +53,11 @@ function atualizarFormulario() {
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
     }
     else if (avaliador === "Luiz Caldana") {
+        aspecto = "Aspecto Percussão";
+        quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
+    }
+
+    else if (avaliador === "Celso Ribeiro 2") {
         aspecto = "Aspecto Percussão";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
     }
@@ -106,6 +115,19 @@ function atualizarFormulario() {
             "O Regente está em traje social?",
             "O Instrumental está dentro do esperado na categoria? (BANDA MUSICAL art. 8º)",
             "A Percussão esta menor que 50 %? ",
+        ];
+    }
+
+    //CHECKLIST DE LINHA DE FRENTE
+    else if (avaliador === "Guilherme") {
+        aspecto = "Aspecto Check List Linha de Frente";
+        quesitos = [
+            "O número de intregrantes da Linha de Frente está dentro do especificado?",
+            "A uniformidade dos integrantes da Linha de Frente está guardando as cores da Corporação Musical?",
+            "O Corpo Coreográfico está com o número mínimo de componentes exigido? ",
+            "A Corporação possui Estandarte, Faixa ou Distintivo?",
+            "A Corporação possui Pavilhão Nacional?",
+            "As Guardas de Bandeira estão em ordem?"
         ];
     }
 
@@ -588,7 +610,23 @@ function atualizarFormulario() {
                 </select><br>
             `;
         })
-    } else if (aspecto === "Dados de Apresentação") {
+    } 
+    else if (aspecto === "Aspecto Check List Linha de Frente") {
+        //lógica do aspecto check list
+        aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
+        quesitos.forEach((q, index) => {
+            // Para o primeiro quesito (Check-in Correto)
+            quesitosDiv.innerHTML += `
+                <label class="label-checkList" for="quesito${index + 1}">${q}</label>
+                <select id="quesito${index + 1}" name="quesito${index + 1}" required>
+                    <option value="">Selecione</option>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select><br>
+            `;
+        })
+    }
+    else if (aspecto === "Dados de Apresentação") {
         //lógica do aspecto Dados de Apresentação
         aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
         quesitos.forEach((q, index) => {
@@ -1003,7 +1041,7 @@ function handleMorExistenteChange() {
         });
     }
 }
-
+ 
 
 
 

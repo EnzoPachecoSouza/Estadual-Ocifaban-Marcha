@@ -90,22 +90,22 @@ function atualizarFormulario() {
 
     //-----------------------------------------------------------------------------------------------------------------
 
-    else if (avaliador === "checkin") {
+    else if (avaliador === "Checkin") {
         aspecto = "Aspecto Check-In";
         quesitos = ["Check-in Correto", "Horário Feito", "A corporação seguiu a ordem de apresentação?", "Maestro(a)", "CPF"];
     }
 
-    else if (avaliador === "cronometro") {
+    else if (avaliador === "Cronômetro") {
         aspecto = "Aspecto Cronômetro";
         quesitos = ["Tempo de Apresentação", "Estourou o Tempo?", "", "Maestro(a)", "CPF"];
     }
 
-    else if (avaliador === "etaria") {
+    else if (avaliador === "Faixa Etária") {
         aspecto = "Aspecto Faixa Etária";
         quesitos = ["Componentes do Corpo Musical (Total)", "Quantidade acima da idade", "Máximo de 5%", "Componentes da Linha de Frente (Total)", "Quantidade acima da idade", "Máximo de 5%", "Componentes do Corpo Coreográfico", "Maestro(a)", "CPF"];
     }
 
-    else if (avaliador === "checklist") {
+    else if (avaliador === "Checklist") {
         aspecto = "Aspecto Check List";
         quesitos = [
             "A Corporação se posicionou 30 minutos antes de sua apresentação?",
@@ -130,6 +130,21 @@ function atualizarFormulario() {
             "As Guardas de Bandeira estão em ordem?"
         ];
     }
+
+    else if (avaliador === "Dados") {
+        aspecto = "Dados de Apresentação";
+        quesitos = [
+            "Nome da Corporação",
+            "Maestro/Maestrina",
+            "Mor",
+            "Baliza Feminino",
+            "Baliza Masculino",
+            "Baliza Trans",
+            "Peça de Aquecimento",
+            "Peça de Confronto"
+        ];
+    }
+
 
     //-----------------------------------------------------------------------------------------------------------------
 
@@ -512,6 +527,22 @@ function atualizarFormulario() {
     `;
     }
 
+    else if (aspecto === "Dados de Apresentação") {
+        aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
+
+        quesitos.forEach((q, index) => {
+            // Decide se é texto ou número (aqui todos podem ser texto)
+            let inputType = "text";
+
+            quesitosDiv.innerHTML += `
+            <label for="quesito${index + 1}">${q}:</label>
+            <input type="${inputType}" id="quesito${index + 1}" 
+                   name="quesito${index + 1}" required><br>
+        `;
+        });
+    }
+
+
     //---------------------------------------------------------------------------------------------------------------------
 
     else if (aspecto === "Aspecto Check-In") {
@@ -573,7 +604,7 @@ function atualizarFormulario() {
             <label for="quesito1">${quesitos[4]}:</label>
             <input type="text" id="quesito5" name="quesito5" required><br>
         `;
-    } else if (avaliador === "etaria") {
+    } else if (avaliador === "Faixa Etária") {
         aspecto = "Aspecto Faixa Etária";
         quesitos = [
             "Componentes do Corpo Musical (Total)", // campo numérico
@@ -610,7 +641,7 @@ function atualizarFormulario() {
                 </select><br>
             `;
         })
-    } 
+    }
     else if (aspecto === "Aspecto Check List Linha de Frente") {
         //lógica do aspecto check list
         aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
@@ -1041,7 +1072,7 @@ function handleMorExistenteChange() {
         });
     }
 }
- 
+
 
 
 
@@ -1340,6 +1371,25 @@ function abrirModalConfirmacao(event) {
             <p><strong>Instrumental</strong>Apontamentos: ${errosInstrumental}</p>
         `;
     }
+    else if (avaliador === "Dados") {
+    const inputs = document.querySelectorAll("#quesitos input, #quesitos select"); // ✅ agora existe
+
+    inputs.forEach((input) => {
+        let nomeQuesito = document.querySelector(`label[for="${input.id}"]`);
+        let valorCampo = input.value.trim();
+
+        if (nomeQuesito) {
+            let nome = nomeQuesito.innerText;
+            let valor = valorCampo !== "" ? valorCampo : "Não informado";
+
+            let item = document.createElement("p");
+            item.innerHTML = `<strong>${nome}</strong> ${valor}`;
+            modalBody.appendChild(item);
+        }
+    });
+}
+
+
     else {
         // Captura todos os inputs e selects dentro da div "quesitos"
         const inputs = document.querySelectorAll("#quesitos input, #quesitos select");
@@ -1441,6 +1491,24 @@ function enviarAvaliacao() {
         if (camposInvalidos) return;
     }
 
+    if (avaliador === "Dados") {
+        inputs.forEach((input) => {
+            let nomeCampo = input.name;
+            let valorCampo = input.value.trim();
+
+            if (valorCampo === "") {
+                alert(`⚠️ O campo "${nomeCampo}" não pode estar vazio.`);
+                camposInvalidos = true;
+                return;
+            }
+
+            dados[nomeCampo] = valorCampo;
+        });
+
+        if (camposInvalidos) return;
+    }
+
+
 
     else {
         // Para os outros avaliadores (seu código original)
@@ -1485,7 +1553,7 @@ function enviarAvaliacao() {
                 }
 
                 // Faixa Etária
-                if (avaliador === "etaria" && (isNaN(valor) || valor < 0)) {
+                if (avaliador === "Faixa Etária" && (isNaN(valor) || valor < 0)) {
                     alert(`⚠️ O valor do campo "${nomeCampo}" deve ser maior ou igual a 0`);
                     camposInvalidos = true;
                     return;
@@ -1502,7 +1570,7 @@ function enviarAvaliacao() {
 
                 // Demais avaliadores numéricos (5–10)
                 if (
-                    avaliador !== "etaria" &&
+                    avaliador !== "Faixa Etária" &&
                     avaliador !== "Antônio Carlos Schmidt" &&
                     avaliador !== "Felipe Sangali" &&
                     avaliador !== "Eliane Humberg" &&

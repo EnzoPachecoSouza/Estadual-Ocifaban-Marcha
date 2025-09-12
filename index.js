@@ -26,10 +26,11 @@ function verificarLogin(event) {
         { nome: "Theo Ribeiro", email: "teste17@teste.com", senha: "1234" }, //MOR
         { nome: "Guilherme", email: "teste18@teste.com", senha: "1234" }, //CHECK LIST checkin
 
-        { nome: "checkin", email: "teste19@teste.com", senha: "1234" }, //CHECK IN
-        { nome: "cronometro", email: "teste20@teste.com", senha: "1234" }, //CRONOMETRO
-        { nome: "etaria", email: "teste21@teste.com", senha: "1234" }, // FAIXA ETARIA
-        { nome: "checklist", email: "teste22@teste.com", senha: "1234" } // CHECK LIST
+        { nome: "Checkin", email: "teste19@teste.com", senha: "1234" }, //CHECK IN
+        { nome: "Cronômetro", email: "teste20@teste.com", senha: "1234" }, //CRONOMETRO
+        { nome: "Faixa Etária", email: "teste21@teste.com", senha: "1234" }, // FAIXA ETARIA
+        { nome: "Checklist", email: "teste22@teste.com", senha: "1234" }, // CHECK LIST
+        { nome: "Dados", email: "teste23@teste.com", senha: "1234" }
     ];
 
     const email = document.getElementById("email").value;

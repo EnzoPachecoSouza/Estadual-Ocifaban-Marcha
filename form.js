@@ -1372,22 +1372,22 @@ function abrirModalConfirmacao(event) {
         `;
     }
     else if (avaliador === "Dados") {
-    const inputs = document.querySelectorAll("#quesitos input, #quesitos select"); // ✅ agora existe
+        const inputs = document.querySelectorAll("#quesitos input, #quesitos select"); // ✅ agora existe
 
-    inputs.forEach((input) => {
-        let nomeQuesito = document.querySelector(`label[for="${input.id}"]`);
-        let valorCampo = input.value.trim();
+        inputs.forEach((input) => {
+            let nomeQuesito = document.querySelector(`label[for="${input.id}"]`);
+            let valorCampo = input.value.trim();
 
-        if (nomeQuesito) {
-            let nome = nomeQuesito.innerText;
-            let valor = valorCampo !== "" ? valorCampo : "Não informado";
+            if (nomeQuesito) {
+                let nome = nomeQuesito.innerText;
+                let valor = valorCampo !== "" ? valorCampo : "Não informado";
 
-            let item = document.createElement("p");
-            item.innerHTML = `<strong>${nome}</strong> ${valor}`;
-            modalBody.appendChild(item);
-        }
-    });
-}
+                let item = document.createElement("p");
+                item.innerHTML = `<strong>${nome}</strong> ${valor}`;
+                modalBody.appendChild(item);
+            }
+        });
+    }
 
 
     else {
@@ -1741,88 +1741,177 @@ function habibilitarCampos() {
 // document.getElementById("icon-reset").classList.remove("disabled");
 
 
-const SELETOR_ALVO_CAPTURA = ".container-pai"; // mude se necessário
+const SELETOR_ALVO_CAPTURA = ".container-pai";
+
+// Quais avaliadores/aspectos usam o onclone LITE (NÃO mexe nos inputs)
+const AVALIADORES_LITE = [
+  "Eliane Humberg",        // Uniformidade e Instrumental
+  "Antônio Carlos Schmidt",// Marcha
+  "Felipe Sangali",        // Garbo
+  "Airton Moreira",        // Alinhamento
+  "Celso Ribeiro",         // Cobertura
+  "Checkin",               // Check-In
+  "Cronômetro",            // Cronômetro
+  "Faixa Etária",          // Faixa Etária
+  "Checklist",             // Check List
+  "Guilherme",             // Check List Linha de Frente
+];
+
+const ASPECTOS_LITE = [
+  "Aspecto Uniformidade e Instrumental",
+  "Aspecto Marcha",
+  "Aspecto Garbo",
+  "Aspecto Alinhamento",
+  "Aspecto Cobertura",
+  "Aspecto Check-In",
+  "Aspecto Cronômetro",
+  "Aspecto Faixa Etária",
+  "Aspecto Check List",
+  "Aspecto Check List Linha de Frente",
+];
 
 async function printPDF(formatoPreferido = 'png') {
-    if (document.getElementById("icon-pdf").classList.contains("disabled")) {
-        alert("⚠️ Você precisa enviar a avaliação primeiro!");
-        return;
+  if (document.getElementById("icon-pdf").classList.contains("disabled")) {
+    alert("⚠️ Você precisa enviar a avaliação primeiro!");
+    return;
+  }
+  const avaliador = getAvaliador();
+  const corporacao = document.getElementById("corporacao")?.value || "";
+  if (!avaliador || !corporacao) {
+    alert("⚠️ Preencha Avaliador e Corporação antes de gerar.");
+    return;
+  }
+  const nomeBase = sanitizeFileName(`${corporacao} - ${avaliador}`);
+
+  const alvo = document.querySelector(SELETOR_ALVO_CAPTURA) || document.body;
+  if (!alvo) {
+    alert("⚠️ Não encontrei o elemento da avaliação para capturar.");
+    return;
+  }
+
+  const pageWidth = Math.max(
+    alvo.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.scrollWidth,
+    window.innerWidth
+  );
+  const pageHeight = Math.max(
+    alvo.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.scrollHeight,
+    window.innerHeight
+  );
+  const baseScale = Math.min(window.devicePixelRatio || 2, 3);
+
+  // fixa valores nos campos (alguns webviews ignoram o value atual)
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    if (el.tagName === 'SELECT') {
+      const opt = el.options[el.selectedIndex];
+      el.setAttribute('data-text', opt ? opt.text : '');
+    } else if (el.type === 'checkbox' || el.type === 'radio') {
+      el.setAttribute('data-text', el.checked ? '✓' : '—');
+    } else {
+      el.setAttribute('value', el.value);
+      el.setAttribute('data-text', el.value);
     }
-    const avaliador = getAvaliador();
-    const corporacao = document.getElementById("corporacao")?.value || "";
-    if (!avaliador || !corporacao) {
-        alert("⚠️ Preencha Avaliador e Corporação antes de gerar.");
-        return;
-    }
-    const nomeBase = sanitizeFileName(`${corporacao} - ${avaliador}`);
+  });
 
-    // alvo da captura (use "body" se quiser a página inteira)
-    const alvo = document.querySelector(SELETOR_ALVO_CAPTURA) || document.body;
-    if (!alvo) {
-        alert("⚠️ Não encontrei o elemento da avaliação para capturar.");
-        return;
-    }
+  const aspectoAtual = (document.querySelector('#aspecto h3')?.textContent || '').trim();
 
-    // Dimensões REAIS do conteúdo (inclui o que está fora da viewport)
-    const pageWidth = Math.max(
-        alvo.scrollWidth,
-        document.documentElement.scrollWidth,
-        document.body.scrollWidth,
-        window.innerWidth
-    );
-    const pageHeight = Math.max(
-        alvo.scrollHeight,
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight,
-        window.innerHeight
-    );
+  // ======= AQUI ESTÁ O "UM IF/ELSE" (na prática, um booleano) =======
+  const usarLite =
+    AVALIADORES_LITE.includes(avaliador) || ASPECTOS_LITE.includes(aspectoAtual);
+  // ================================================================
 
-    // Escala segura (aumente/diminua conforme a necessidade/performace)
-    const baseScale = Math.min(window.devicePixelRatio || 2, 3);
+  const baseOpts = {
+    backgroundColor: "#ffffff",
+    useCORS: true,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: pageWidth,
+    windowHeight: pageHeight,
+    scale: baseScale,
+    ignoreElements: (el) => el.classList?.contains('nocapture'),
+  };
 
-    const canvas = await html2canvas(alvo, {
-        backgroundColor: "#ffffff",
-        useCORS: true,
-        scrollX: 0,
-        scrollY: 0,
-        windowWidth: pageWidth,
-        windowHeight: pageHeight,
-        scale: baseScale,
-        // Ajustes no DOM clonado para evitar cortes
-        onclone: (doc) => {
-            const el = doc.querySelector(SELETOR_ALVO_CAPTURA) || doc.body;
+  // onclone que NÃO mexe nos inputs (LITE)
+  const oncloneLite = (doc) => {
+    const el = doc.querySelector(SELETOR_ALVO_CAPTURA) || doc.body;
+    el.style.overflow  = "visible";
+    el.style.height    = "auto";
+    el.style.maxHeight = "none";
+    el.style.maxWidth  = "none";
+    el.style.transform = "none";
+    doc.querySelectorAll('.nocapture').forEach(n => (n.style.display = 'none'));
+    doc.querySelectorAll('.fixed, .sticky').forEach(n => (n.style.position = 'static'));
 
-            // Remover limites que possam cortar o conteúdo
-            el.style.overflow = "visible";
-            el.style.height = "auto";
-            el.style.maxHeight = "none";
-            el.style.maxWidth = "none";
-
-            // Desativar transforms que às vezes causam clipping
-            el.style.transform = "none";
-
-            // Se houver wrappers/containers que limitam altura/overflow, libere-os também:
-            // doc.querySelectorAll('.wrapper, .content, #formulario').forEach(node => {
-            //   node.style.overflow = "visible";
-            //   node.style.height = "auto";
-            //   node.style.maxHeight = "none";
-            //   node.style.transform = "none";
-            // });
-
-            // Opcional: esconda elementos que não devem sair na imagem (ex.: botões)
-            // Basta adicionar class="nocapture" neles no seu HTML/CSS
-            doc.querySelectorAll('.nocapture').forEach(node => (node.style.display = 'none'));
-
-            // Opcional: elementos fixos/sticky podem sobrepor; torne-os estáticos na captura
-            doc.querySelectorAll('.fixed, .sticky').forEach(node => (node.style.position = 'static'));
-        },
-        // Ignora explicitamente elementos marcados
-        ignoreElements: (el) => el.classList?.contains('nocapture'),
+    // Evita que controles "saiam" do container
+    doc.querySelectorAll('input, select, textarea').forEach(ctrl => {
+      const cs = doc.defaultView.getComputedStyle(ctrl);
+      ctrl.style.maxWidth     = '100%';
+      ctrl.style.boxSizing    = 'border-box';
+      ctrl.style.whiteSpace   = 'nowrap';
+      ctrl.style.textOverflow = 'clip';
+      ctrl.style.overflow     = 'hidden';
+      if (!cs.height || cs.height === 'auto') ctrl.style.minHeight = '36px';
     });
+  };
 
-    await salvarImagemAuto(canvas, nomeBase);
-    document.getElementById("icon-reset")?.classList.remove("disabled");
+  // onclone que troca inputs por caixas de texto (FULL)
+  const oncloneFull = (doc) => {
+    const el = doc.querySelector(SELETOR_ALVO_CAPTURA) || doc.body;
+    el.style.overflow  = "visible";
+    el.style.height    = "auto";
+    el.style.maxHeight = "none";
+    el.style.maxWidth  = "none";
+    el.style.transform = "none";
+    doc.querySelectorAll('.nocapture').forEach(n => (n.style.display = 'none'));
+    doc.querySelectorAll('.fixed, .sticky').forEach(n => (n.style.position = 'static'));
+
+    doc.querySelectorAll('input, textarea, select').forEach((inp) => {
+      const isCheck = inp.type === 'checkbox' || inp.type === 'radio';
+      const txt = isCheck ? (inp.checked ? '✓' : '—') : (inp.value ?? '');
+
+      const box = doc.createElement('div');
+      box.textContent = txt === '' ? ' ' : txt;
+
+      const cs = doc.defaultView.getComputedStyle(inp);
+      box.style.display      = cs.display === 'inline' ? 'inline-block' : 'block';
+      box.style.width        = cs.width;
+      box.style.minHeight    = cs.height;
+      box.style.maxWidth     = '100%';
+      box.style.boxSizing    = 'border-box';
+      box.style.margin       = cs.margin;
+
+      box.style.padding      = cs.padding;
+      box.style.border       = cs.border;
+      box.style.borderRadius = cs.borderRadius;
+      box.style.background   = '#ffffff';
+
+      box.style.fontFamily   = cs.fontFamily;
+      box.style.fontSize     = cs.fontSize;
+      box.style.fontWeight   = cs.fontWeight;
+      box.style.lineHeight   = cs.lineHeight;
+
+      box.style.whiteSpace   = 'pre-wrap';
+      box.style.wordBreak    = 'break-word';
+      box.style.overflowWrap = 'anywhere';
+
+      box.className = inp.className;
+      inp.replaceWith(box);
+    });
+  };
+
+  const canvas = await html2canvas(
+    alvo,
+    usarLite ? { ...baseOpts, onclone: oncloneLite } : { ...baseOpts, onclone: oncloneFull }
+  );
+
+  await salvarImagemAuto(canvas, nomeBase);
+  document.getElementById("icon-reset")?.classList.remove("disabled");
 }
+
+
 
 function sanitizeFileName(nome) {
     return nome.replace(/[\/\\?%*:|"<>]/g, "_").trim();

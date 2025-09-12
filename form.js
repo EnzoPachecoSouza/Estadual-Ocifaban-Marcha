@@ -1953,11 +1953,31 @@ async function salvarImagemAuto(canvas, nomeBase) {
 
             resolve(true);
         }, "image/png", 1.0);
+        resetPrintArtifacts();
     });
 }
 
 
 // }
+
+function resetPrintArtifacts(root = document) {
+  root.querySelectorAll('input, select, textarea').forEach(el => {
+    // atributos usados na captura
+    el.removeAttribute('data-text');
+    // INPUT: o atributo value “gruda” como default; apague para o reset funcionar de verdade
+    if (el.tagName !== 'SELECT') {
+      el.removeAttribute('value');
+    }
+
+    // caso algum estilo inline tenha sido aplicado em runtime
+    el.style.removeProperty('max-width');
+    el.style.removeProperty('min-height');
+    el.style.removeProperty('white-space');
+    el.style.removeProperty('text-overflow');
+    el.style.removeProperty('overflow');
+    el.style.removeProperty('box-sizing');
+  });
+}
 
 
 

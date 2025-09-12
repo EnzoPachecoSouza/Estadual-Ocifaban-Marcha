@@ -95,7 +95,7 @@ function atualizarFormulario() {
         quesitos = ["Check-in Correto", "Horário Feito", "A corporação seguiu a ordem de apresentação?", "Maestro(a)", "CPF"];
     }
 
-    else if (avaliador === "Daniel Borges") {
+    else if (avaliador === "cronometro") {
         aspecto = "Aspecto Cronômetro";
         quesitos = ["Tempo de Apresentação", "Estourou o Tempo?", "", "Maestro(a)", "CPF"];
     }

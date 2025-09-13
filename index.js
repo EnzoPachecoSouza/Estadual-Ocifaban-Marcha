@@ -3,16 +3,16 @@ function verificarLogin(event) {
 
     const usuarios = [
         { nome: "teste", email: "teste@teste.com", senha: "1234" },
-        { nome: "Paulo Baptista", email: "teste1@teste.com", senha: "1234" }, //SOPROS
-        { nome: "Marcelo Bambam", email: "teste2@teste.com", senha: "1234" }, //SOPROS
-        { nome: "Felipe Sangali 2", email: "teste90@teste.com", senha: "1234" }, //SOPROS
-        { nome: "Marco Almeida Jr", email: "teste3@teste.com", senha: "1234" }, //INTERPRETAÇÃO
-        { nome: "Jorge Scheffer", email: "teste4@teste.com", senha: "1234" }, //INTERPRETAÇÃO
-        { nome: "Hércules Alves", email: "teste5@teste.com", senha: "1234" }, //PERCUSSÃO
-        { nome: "Luiz Caldana", email: "teste6@teste.com", senha: "1234" }, //PERCUSSÃO
-        { nome: "Celso Ribeiro 2", email: "teste80@teste.com", senha: "1234" }, //PERCUSSÃO
+        { nome: "Paulo Baptista", email: "paulo@appavaliaai.com", senha: "Pb1234@" }, //SOPROS
+        { nome: "Marcelo Bambam", email: "marcelo@appavaliaai.com", senha: "Mb1324#" }, //SOPROS
+        { nome: "Felipe Sangali 2", email: "felipe@appavaliaai.com", senha: "Fs1432#" }, //SOPROS
+        { nome: "Marco Almeida Jr", email: "marco@appavaliaai.com", senha: "Ma1325#" }, //INTERPRETAÇÃO
+        { nome: "Jorge Scheffer", email: "jorge@appavaliaai.com", senha: "Js5678#" }, //INTERPRETAÇÃO
+        { nome: "Hércules Alves", email: "hercules@appavaliaai.com", senha: "Ha0987#" }, //PERCUSSÃO
+        { nome: "Luiz Caldana", email: "luiz@appavaliaai.com", senha: "Lc0990#" }, //PERCUSSÃO
+        { nome: "Celso Ribeiro 2", email: "celso@appavaliaai.com", senha: "Cr1675#" }, //PERCUSSÃO
 
-        { nome: "Eliane Humberg", email: "teste7@teste.com", senha: "1234" }, //UNIFORMIDADE E INSTRUMENTAL
+        { nome: "Eliane Humberg", email: "eliane@appavaliaai.com", senha: "Eh0009@" }, //UNIFORMIDADE E INSTRUMENTAL
         { nome: "Celso Ribeiro", email: "teste8@teste.com", senha: "1234" }, //COBERTURA
         { nome: "Felipe Sangali", email: "teste9@teste.com", senha: "1234" }, //GARBO
         { nome: "Antônio Carlos Schmidt", email: "teste10@teste.com", senha: "1234" }, //MARCHA
@@ -27,10 +27,10 @@ function verificarLogin(event) {
         { nome: "Guilherme", email: "teste18@teste.com", senha: "1234" }, //CHECK LIST checkin
 
         { nome: "Checkin", email: "checkin@appavaliaai.com", senha: "Ck1234#" }, //CHECK IN
-        { nome: "Cronômetro", email: "teste20@teste.com", senha: "1234" }, //CRONOMETRO
-        { nome: "Faixa Etária", email: "teste21@teste.com", senha: "1234" }, // FAIXA ETARIA
-        { nome: "Checklist", email: "teste22@teste.com", senha: "1234" }, // CHECK LIST
-        { nome: "Dados", email: "teste23@teste.com", senha: "1234" }
+        { nome: "Cronômetro", email: "cronometro@appavaliaai.com", senha: "Cr1234#" }, //CRONOMETRO
+        { nome: "Faixa Etária", email: "cronometro@appavaliaai.com", senha: "Fe1234#" }, // FAIXA ETARIA
+        { nome: "Checklist", email: "cronometro@appavaliaai.com", senha: "Cl1234#" }, // CHECK LIST
+        { nome: "Dados", email: "cronometro@appavaliaai.com", senha: "1234" }
     ];
 
     const email = document.getElementById("email").value;

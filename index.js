@@ -5,16 +5,16 @@ function verificarLogin(event) {
         { nome: "teste", email: "teste@teste.com", senha: "1234" },
         { nome: "Paulo Baptista", email: "paulo@appavaliaai.com", senha: "Pb1234@" }, //SOPROS
         { nome: "Marcelo Bambam", email: "marcelo@appavaliaai.com", senha: "Mb1324#" }, //SOPROS
-        { nome: "Felipe Sangali 2", email: "felipe@appavaliaai.com", senha: "Fs1432#" }, //SOPROS
+        { nome: "Felipe Sangali", email: "felipe@appavaliaai.com", senha: "Fs1432#" }, //SOPROS
         { nome: "Marco Almeida Jr", email: "marco@appavaliaai.com", senha: "Ma1325#" }, //INTERPRETAÇÃO
         { nome: "Jorge Scheffer", email: "jorge@appavaliaai.com", senha: "Js5678#" }, //INTERPRETAÇÃO
         { nome: "Hércules Alves", email: "hercules@appavaliaai.com", senha: "Ha0987#" }, //PERCUSSÃO
         { nome: "Luiz Caldana", email: "luiz@appavaliaai.com", senha: "Lc0990#" }, //PERCUSSÃO
-        { nome: "Celso Ribeiro 2", email: "celso@appavaliaai.com", senha: "Cr1675#" }, //PERCUSSÃO
+        { nome: "Celso Ribeiro", email: "celso@appavaliaai.com", senha: "Cr1675#" }, //PERCUSSÃO
 
         { nome: "Eliane Humberg", email: "eliane@appavaliaai.com", senha: "Eh0009@" }, //UNIFORMIDADE E INSTRUMENTAL
-        { nome: "Celso Ribeiro", email: "teste8@teste.com", senha: "1234" }, //COBERTURA
-        { nome: "Felipe Sangali", email: "teste9@teste.com", senha: "1234" }, //GARBO
+        { nome: "Celso Ribeiro 2", email: "teste8@teste.com", senha: "1234" }, //COBERTURA
+        { nome: "Felipe Sangali 2", email: "teste9@teste.com", senha: "1234" }, //GARBO
         { nome: "Antônio Carlos Schmidt", email: "teste10@teste.com", senha: "1234" }, //MARCHA
         { nome: "Airton Moreira", email: "teste11@teste.com", senha: "1234" }, //ALINHAMENTO
 

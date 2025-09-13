@@ -1670,11 +1670,16 @@ function atualizarSeletorBandas() {
 }
 
 const bandasDisponiveis = [
-    "01 • Banda A",
-    "02 • Banda B",
-    "03 • Banda C",
-    "04 • Banda D",
-    "05 • Banda E"
+    "01 • ORQUESTRA MUNICIPAL DE STO ANTONIO DE POSSE - STO ANTONIO DE POSSE/ SP",
+    "02 • BANDA DE PERCUSSÃO DE NAZARÉ PAULISTA",
+    "03 • COLÉGIO MONACO - VOTORANTIM/ SP",
+    "04 • FUNDAÇÃO LIA MARIA AGUIAR - CAMPOS DO JORDÃO/ SP",
+    "05 • BAMMA - AMPARO/ SP",
+    "06 • FUNDAÇÃO LIA MARIA AGUIAR - CAMPOS DO JORDÃO/ SP",
+    "07 • COLÉGIO MONACO - VOTORANTIM/ SP",
+    "08 • BANDA MUNICIPAL DE REGISTRO",
+    "09 • FUNDAÇÃO LIA MARIA AGUIAR - CAMPOS DO JORDÃO/ SP",
+    "10 • FUNDAÇÃO LIA MARIA AGUIAR - CAMPOS DO JORDÃO/ SP",
 ];
 
 

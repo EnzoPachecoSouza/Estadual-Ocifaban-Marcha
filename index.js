@@ -18,13 +18,13 @@ function verificarLogin(event) {
         { nome: "Antônio Carlos Schmidt", email: "teste10@teste.com", senha: "1234" }, //MARCHA
         { nome: "Airton Moreira", email: "teste11@teste.com", senha: "1234" }, //ALINHAMENTO
 
-        { nome: "Vanessa Vialta", email: "teste12@teste.com", senha: "1234" }, //PELOTÃO CÍVICO
-        { nome: "Joseph Araújo", email: "teste13@teste.com", senha: "1234" }, //BALIZA FEMININO
-        { nome: "Karen Lavínia", email: "teste14@teste.com", senha: "1234" }, //BALIZA MASCULINO
-        { nome: "Débora Elizabeth", email: "teste15@teste.com", senha: "1234" }, //CORPO COREOGRÁFICO - TÉCNICO
-        { nome: "Eduardo Caetano", email: "teste16@teste.com", senha: "1234" }, //CORPO COREOGRÁFICO - ARTÍSTICO
-        { nome: "Theo Ribeiro", email: "teste17@teste.com", senha: "1234" }, //MOR
-        { nome: "Guilherme", email: "teste18@teste.com", senha: "1234" }, //CHECK LIST checkin
+        { nome: "Vanessa Vialta", email: "test@teste.com", senha: "1234" }, //PELOTÃO CÍVICO
+        { nome: "Joseph Araújo", email: "test@teste.com", senha: "1234" }, //BALIZA FEMININO
+        { nome: "Karen Lavínia", email: "test@teste.com", senha: "1234" }, //BALIZA MASCULINO
+        { nome: "Débora Elizabeth", email: "teste@teste.com", senha: "1234" }, //CORPO COREOGRÁFICO - TÉCNICO
+        { nome: "Eduardo Caetano", email: "test@teste.com", senha: "1234" }, //CORPO COREOGRÁFICO - ARTÍSTICO
+        { nome: "Theo Ribeiro", email: "test@teste.com", senha: "1234" }, //MOR
+        { nome: "Guilherme", email: "test@teste.com", senha: "1234" }, //CHECK LIST checkin
 
         { nome: "Checkin", email: "checkin@appavaliaai.com", senha: "Ck1234#" }, //CHECK IN
         { nome: "Cronômetro", email: "cronometro@appavaliaai.com", senha: "Cr1234#" }, //CRONOMETRO

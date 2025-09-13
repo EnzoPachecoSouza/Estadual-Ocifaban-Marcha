@@ -13,8 +13,8 @@ function verificarLogin(event) {
         { nome: "Celso Ribeiro", email: "celso@appavaliaai.com", senha: "Cr1675#" }, //PERCUSSÃO
 
         { nome: "Eliane Humberg", email: "eliane@appavaliaai.com", senha: "Eh0009@" }, //UNIFORMIDADE E INSTRUMENTAL
-        { nome: "Celso Ribeiro 2", email: "teste8@teste.com", senha: "1234" }, //COBERTURA
-        { nome: "Felipe Sangali 2", email: "teste9@teste.com", senha: "1234" }, //GARBO
+        // { nome: "Celso Ribeiro 2", email: "teste8@teste.com", senha: "1234" }, //COBERTURA
+        // { nome: "Felipe Sangali 2", email: "teste9@teste.com", senha: "1234" }, //GARBO
         { nome: "Antônio Carlos Schmidt", email: "teste10@teste.com", senha: "1234" }, //MARCHA
         { nome: "Airton Moreira", email: "teste11@teste.com", senha: "1234" }, //ALINHAMENTO
 

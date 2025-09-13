@@ -1753,9 +1753,9 @@ const SELETOR_ALVO_CAPTURA = ".container-pai";
 const AVALIADORES_LITE = [
   "Eliane Humberg",        // Uniformidade e Instrumental
   "Antônio Carlos Schmidt",// Marcha
-  "Felipe Sangali",        // Garbo
+//   "Felipe Sangali",        // Garbo
   "Airton Moreira",        // Alinhamento
-  "Celso Ribeiro",         // Cobertura
+//   "Celso Ribeiro",         // Cobertura
   "Checkin",               // Check-In
   "Cronômetro",            // Cronômetro
   "Faixa Etária",          // Faixa Etária

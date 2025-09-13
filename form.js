@@ -1517,7 +1517,7 @@ function enviarAvaliacao() {
             let nomeCampo = input.name; // Nome do quesito
             let valorCampo = input.value.trim();
 
-            if (avaliador === "Airton Moreira" || avaliador === "Celso Ribeiro") {
+            if (avaliador === "Airton Moreira") { //avaliador === "Celso Ribeiro"
                 if (input.type === "hidden") {
                     let valor = valorCampo === "" ? NaN : parseFloat(valorCampo);
                     if (isNaN(valor) || valor < 0 || valor > 10) {

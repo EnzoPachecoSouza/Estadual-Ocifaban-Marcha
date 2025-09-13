@@ -36,7 +36,7 @@ function atualizarFormulario() {
         aspecto = "Aspecto Sopros";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
     }
-    else if (avaliador === "Felipe Sangali 2") {
+    else if (avaliador === "Felipe Sangali") {
         aspecto = "Aspecto Sopros";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
     }
@@ -57,7 +57,7 @@ function atualizarFormulario() {
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
     }
 
-    else if (avaliador === "Celso Ribeiro 2") {
+    else if (avaliador === "Celso Ribeiro") {
         aspecto = "Aspecto Percussão";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
     }
@@ -73,7 +73,7 @@ function atualizarFormulario() {
         quesitos = ["Marcha"];
     }
 
-    else if (avaliador === "Felipe Sangali") {
+    else if (avaliador === "Felipe Sangali 2") {
         aspecto = "Aspecto Garbo";
         quesitos = ["Garbo"];
     }
@@ -83,7 +83,7 @@ function atualizarFormulario() {
         quesitos = ["Alinhamento"];
     }
 
-    else if (avaliador === "Celso Ribeiro") {
+    else if (avaliador === "Celso Ribeiro 2") {
         aspecto = "Aspecto Cobertura";
         quesitos = ["Cobertura"];
     }

@@ -28,9 +28,9 @@ function verificarLogin(event) {
 
         { nome: "Checkin", email: "checkin@appavaliaai.com", senha: "Ck1234#" }, //CHECK IN
         { nome: "Cronômetro", email: "cronometro@appavaliaai.com", senha: "Cr1234#" }, //CRONOMETRO
-        { nome: "Faixa Etária", email: "cronometro@appavaliaai.com", senha: "Fe1234#" }, // FAIXA ETARIA
-        { nome: "Checklist", email: "cronometro@appavaliaai.com", senha: "Cl1234#" }, // CHECK LIST
-        { nome: "Dados", email: "cronometro@appavaliaai.com", senha: "1234" }
+        { nome: "Faixa Etária", email: "faixa@appavaliaai.com", senha: "Fe1234#" }, // FAIXA ETARIA
+        { nome: "Checklist", email: "checklist@appavaliaai.com", senha: "Cl1234#" }, // CHECK LIST
+        { nome: "Dados", email: "dados@appavaliaai.com", senha: "1234" }
     ];
 
     const email = document.getElementById("email").value;

@@ -175,7 +175,7 @@ function atualizarFormulario() {
 
     //---------------------------------------------------------------------------------------------------------------------
 
-    if (aspecto === "Aspecto Sopros" || aspecto === "Aspecto Interpretação" || aspecto === "Aspecto Percussão") {
+    if (aspecto === "Aspecto Sopros" || aspecto === "Aspecto Interpretação" || aspecto === "Aspecto Percussão" || aspecto === "Aspecto Pelotão Cívico") {
         aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
         quesitos.forEach((q, index) => {
             quesitosDiv.innerHTML += `
@@ -482,7 +482,7 @@ function atualizarFormulario() {
         <div id="baliza-sexo-container">
         <h3>Rompimento de Marcha
         <br>
-        (conforme art. 26º)</h3>
+        (conforme art. 24º)</h3>
         <select id="verificaRompimento" name="verificaRompimento" required>
             <option value="">Selecione</option>
             <option value="Valido">Válido</option>
@@ -1670,11 +1670,18 @@ function atualizarSeletorBandas() {
 }
 
 const bandasDisponiveis = [
-    "19 • BANDA MUN VALDIR DA SILVA FERREIRA - ITAPEVI",
-    "20 • PROJ. EDUCANDO COM MÚSICA E CIDADANIA - ATIBAIA/ SP",
-    "21 • GRUPO DE METAIS E PERCUSSÃO ESCOLA DAS ARTES - AMPARO/ SP",
-    "22 • BANDA SINFÔNICA ESCOLA DAS ARTES - AMPARO/ SP",
-    "23 • BAMMA - ORQUESTRA LIVRE - AMPARO/ SP"
+    "01 • BAMMA - BAMINHA KIDS - AMPARO/SP",
+    "02 • COLÉGIO CRISTO REI - PRESIDENTE PRUDENTE/SP ",
+    "03 • COLÉGIO CRISTO REI - PRESIDENTE PRUDENTE/ SP",
+    "04 • ESCOLA MUNICIPAL CREUSA GOMES - BRAGANÇA PAULISTA/ SP",
+    "05 • ORQUESTRA MUNICIPAL DE STO ANTONIO DE POSSE - STO ANTONIO DE POSSE/ SP",
+    "06 • BAMAVO - BANDA MARCIAL DE VOTORANTIM - VOTORANTIM/ SP",
+    "07 • FANFARRA DR. GETÚLIO VARGAS - SOROCABA/ SP",
+    "08 • BAMMA - BAMINHA DRUMS - AMPARO/ SP",
+    "09 • COLÉGIO CRISTO REI - PRESIDENTE PRUDENTE/ SP",
+    "10 • FANFARRA DR. GETÚLIO VARGAS - SOROCABA/ SP",
+    "11 • COLÉGIO CRISTO REI - PRESIDENTE PRUDENTE/ SP",
+    "12 • EMEF PAULO ROLIM LOUREIRO",
 ];
 
 

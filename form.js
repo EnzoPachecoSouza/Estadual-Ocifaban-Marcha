@@ -36,10 +36,10 @@ function atualizarFormulario() {
         aspecto = "Aspecto Sopros";
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
     }
-    else if (avaliador === "Felipe Sangali") {
-        aspecto = "Aspecto Sopros";
-        quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
-    }
+    // else if (avaliador === "Felipe Sangali") {
+    //     aspecto = "Aspecto Sopros";
+    //     quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Articulação"];
+    // }
     else if (avaliador === "Marco Almeida Jr") {
         aspecto = "Aspecto Interpretação";
         quesitos = ["Fraseado", "Expressão", "Regência", "Escolha de Repertório"];
@@ -57,10 +57,10 @@ function atualizarFormulario() {
         quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
     }
 
-    else if (avaliador === "Celso Ribeiro") {
-        aspecto = "Aspecto Percussão";
-        quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
-    }
+    // else if (avaliador === "Celso Ribeiro") {
+    //     aspecto = "Aspecto Percussão";
+    //     quesitos = ["Afinação", "Ritmo/Precisão Rítmica", "Dinâmica/Equilíbrio", "Técnica Instrumental"];
+    // }
     //-----------------------------------------------------------------------------------------------------------------
 
     else if (avaliador === "Eliane Humberg") {
@@ -73,20 +73,20 @@ function atualizarFormulario() {
         quesitos = ["Marcha"];
     }
 
-    // else if (avaliador === "Felipe Sangali 2") {
-    //     aspecto = "Aspecto Garbo";
-    //     quesitos = ["Garbo"];
-    // }
+    else if (avaliador === "Felipe Sangali") {
+        aspecto = "Aspecto Garbo";
+        quesitos = ["Garbo"];
+    }
 
     else if (avaliador === "Airton Moreira") {
         aspecto = "Aspecto Alinhamento";
         quesitos = ["Alinhamento"];
     }
 
-    // else if (avaliador === "Celso Ribeiro 2") {
-    //     aspecto = "Aspecto Cobertura";
-    //     quesitos = ["Cobertura"];
-    // }
+    else if (avaliador === "Celso Ribeiro") {
+        aspecto = "Aspecto Cobertura";
+        quesitos = ["Cobertura"];
+    }
 
     //-----------------------------------------------------------------------------------------------------------------
 
@@ -119,7 +119,7 @@ function atualizarFormulario() {
     }
 
     //CHECKLIST DE LINHA DE FRENTE
-    else if (avaliador === "Guilherme") {
+    else if (avaliador === "Guilherme Souza") {
         aspecto = "Aspecto Check List Linha de Frente";
         quesitos = [
             "O número de intregrantes da Linha de Frente está dentro do especificado?",
@@ -163,7 +163,7 @@ function atualizarFormulario() {
         quesitos = ["Sincronismo", "Ritmo", "Marcha", "Uniformidade", "Execução Coreográfica"];
     }
 
-    else if (avaliador === "Joseph Araújo" || avaliador === "Karen Lavínia") {
+    else if (avaliador === "Júlia Nascimento" || avaliador === "Karen Lavínia") {
         aspecto = "Aspecto Baliza";
         quesitos = ["Manuseio do Bastão", "Performance de Entrada", "Coreografia", "Dança", "Movimentos Acrobáticos", "Elementos", "Uniforme"];
     }
@@ -301,39 +301,39 @@ function atualizarFormulario() {
 
     //----------------------------------------------------------------------------------------------------------------
 
-    // else if (avaliador === "Celso Ribeiro") {
-    //     aspecto = "Aspecto Cobertura";
-    //     quesitosDiv.innerHTML = `
-    // <div class="input-grid-config">
-    //     <label for="colunas">Frente</label>
-    //     <input class="input-pista" type="number" id="linhas" min="1" style="width: 60px;" />
+    else if (avaliador === "Celso Ribeiro") {
+        aspecto = "Aspecto Cobertura";
+        quesitosDiv.innerHTML = `
+    <div class="input-grid-config">
+        <label for="colunas">Frente</label>
+        <input class="input-pista" type="number" id="linhas" min="1" style="width: 60px;" />
 
-    //     <label for="linhas">Lateral</label>
-    //     <input class="input-pista" type="number" id="colunas" min="1" style="width: 60px;" />
-    // </div>
+        <label for="linhas">Lateral</label>
+        <input class="input-pista" type="number" id="colunas" min="1" style="width: 60px;" />
+    </div>
 
-    // <button type="button" onclick="renderCoberturaGrid()">Gerar Formação</button>
+    <button type="button" onclick="renderCoberturaGrid()">Gerar Formação</button>
 
-    // <div class="quadrantes">
-    //     <div class="quadrante">
-    //         <h3>Cobertura</h3>
-    //         <div class="nota-container">
-    //             <div class="nota-display" id="notaCobertura">10.00</div>
-    //         </div>
-    //         <div class="grid-checkboxes" id="cobertura-grid"></div>
-    //         <div class="erros-container">
-    //             <label>ERROS</label>
-    //             <div class="controle-erros">
-    //                 <span class="contador" id="cobertura-erros">0</span>
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>
+    <div class="quadrantes">
+        <div class="quadrante">
+            <h3>Cobertura</h3>
+            <div class="nota-container">
+                <div class="nota-display" id="notaCobertura">10.00</div>
+            </div>
+            <div class="grid-checkboxes" id="cobertura-grid"></div>
+            <div class="erros-container">
+                <label>ERROS</label>
+                <div class="controle-erros">
+                    <span class="contador" id="cobertura-erros">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    // <!-- Campo oculto -->
-    // <input type="hidden" id="inputCobertura" name="quesito1" value="10.00">
-    // `;
-    // }
+    <!-- Campo oculto -->
+    <input type="hidden" id="inputCobertura" name="quesito1" value="10.00">
+    `;
+    }
 
     //---------------------------------------------------------------------------------------------------------------------
 
@@ -492,40 +492,40 @@ function atualizarFormulario() {
     `;
     }
 
-    // else if (avaliador === "Felipe Sangali") {
-    //     aspecto = "Aspecto Garbo";
-    //     quesitosDiv.innerHTML = `
-    //     <div class="input-grid-config">
-    //         <label for="colunas">Frente</label>
-    //         <input class="input-pista" type="number" id="linhas" min="1" style="width: 60px;" />
-    //         <label for="linhas">Lateral</label>
-    //         <input class="input-pista" type="number" id="colunas" min="1" style="width: 60px;" />
+    else if (avaliador === "Felipe Sangali") {
+        aspecto = "Aspecto Garbo";
+        quesitosDiv.innerHTML = `
+        <div class="input-grid-config">
+            <label for="colunas">Frente</label>
+            <input class="input-pista" type="number" id="linhas" min="1" style="width: 60px;" />
+            <label for="linhas">Lateral</label>
+            <input class="input-pista" type="number" id="colunas" min="1" style="width: 60px;" />
             
-    //     </div>
+        </div>
 
-    //     <button type="button" onclick="renderGarboGrid()">Gerar Formação</button>
+        <button type="button" onclick="renderGarboGrid()">Gerar Formação</button>
 
-    //     <div class="quadrantes">
-    //         <div class="quadrante">
-    //             <h3>Garbo</h3>
-    //             <div class="nota-container">
-    //                 <div class="nota-display" id="notaGarbo">10.00</div>
-    //             </div>
-    //             <div class="grid-checkboxes" id="garbo-grid"></div>
-    //             <div class="erros-container">
-    //                 <label>ERROS</label>
-    //                 <div class="controle-erros">
-    //                     <span class="contador" id="garbo-erros">0</span>
-    //                 </div>
-    //             </div>
-    //         </div>  
-    //     </div>
+        <div class="quadrantes">
+            <div class="quadrante">
+                <h3>Garbo</h3>
+                <div class="nota-container">
+                    <div class="nota-display" id="notaGarbo">10.00</div>
+                </div>
+                <div class="grid-checkboxes" id="garbo-grid"></div>
+                <div class="erros-container">
+                    <label>ERROS</label>
+                    <div class="controle-erros">
+                        <span class="contador" id="garbo-erros">0</span>
+                    </div>
+                </div>
+            </div>  
+        </div>
 
-    //     <!-- Campos ocultos para envio do formulário -->
-    //     <input type="hidden" id="inputGarbo" name="quesito1" value="10.00">
-    //     </div>
-    // `;
-    // }
+        <!-- Campos ocultos para envio do formulário -->
+        <input type="hidden" id="inputGarbo" name="quesito1" value="10.00">
+        </div>
+    `;
+    }
 
     else if (aspecto === "Dados de Apresentação") {
         aspectoDiv.innerHTML = `<h3>${aspecto}</h3>`;
@@ -1340,27 +1340,27 @@ function abrirModalConfirmacao(event) {
         modalBody.innerHTML = `
             <p><strong>Alinhamento</strong>Apontamentos: ${errosAlinhamento}</p>
         `;
-    // } else if (avaliador === "Celso Ribeiro") {
-    //     const errosCobertura = document.getElementById("cobertura-erros").textContent;
+    } else if (avaliador === "Celso Ribeiro") {
+        const errosCobertura = document.getElementById("cobertura-erros").textContent;
 
 
-    //     modalBody.innerHTML = `
-    //         <p><strong>Cobertura</strong>Apontamentos: ${errosCobertura}</p>
-    //     `;
-    // } else if (avaliador === "Antônio Carlos Schmidt") {
+        modalBody.innerHTML = `
+            <p><strong>Cobertura</strong>Apontamentos: ${errosCobertura}</p>
+        `;
+    } else if (avaliador === "Antônio Carlos Schmidt") {
         const errosMarcha = document.getElementById("marcha-erros").textContent;
 
         modalBody.innerHTML = `
             <p><strong>Marcha</strong>Apontamentos: ${errosMarcha}</p>
         `;
     }
-    // else if (avaliador === "Felipe Sangali") {
-    //     const errosGarbo = document.getElementById("garbo-erros").textContent;
+    else if (avaliador === "Felipe Sangali") {
+        const errosGarbo = document.getElementById("garbo-erros").textContent;
 
-    //     modalBody.innerHTML = `
-    //         <p><strong>Garbo</strong>Apontamentos: ${errosGarbo}</p>
-    //     `;
-    // }
+        modalBody.innerHTML = `
+            <p><strong>Garbo</strong>Apontamentos: ${errosGarbo}</p>
+        `;
+    }
     else if (avaliador === "Eliane Humberg") {
         const errosUniformidade = document.getElementById("uniformidade-erros").textContent;
         const errosInstrumental = document.getElementById("instrumental-erros").textContent;
@@ -1473,23 +1473,23 @@ function enviarAvaliacao() {
         dados["quesito3"] = rompimentoSelect.value;
     }
 
-    // if (avaliador === "Felipe Sangali") {
-    //     let camposInvalidos = false;
+    if (avaliador === "Felipe Sangali") {
+        let camposInvalidos = false;
 
-    //     // Pega os valores das notas ocultas de Garbo e Marcha
-    //     const inputGarbo = document.getElementById("inputGarbo");
+        // Pega os valores das notas ocultas de Garbo e Marcha
+        const inputGarbo = document.getElementById("inputGarbo");
 
-    //     const valorGarbo = parseFloat(inputGarbo.value);
+        const valorGarbo = parseFloat(inputGarbo.value);
 
-    //     if (isNaN(valorGarbo) || valorGarbo < 0) {
-    //         alert("⚠️ O valor de Garbo deve ser maior ou igual a 0.");
-    //         camposInvalidos = true;
-    //     } else {
-    //         dados["quesito2"] = valorGarbo;
-    //     }
+        if (isNaN(valorGarbo) || valorGarbo < 0) {
+            alert("⚠️ O valor de Garbo deve ser maior ou igual a 0.");
+            camposInvalidos = true;
+        } else {
+            dados["quesito2"] = valorGarbo;
+        }
 
-    //     if (camposInvalidos) return;
-    // }
+        if (camposInvalidos) return;
+    }
 
     if (avaliador === "Dados") {
         inputs.forEach((input) => {
@@ -1517,7 +1517,7 @@ function enviarAvaliacao() {
             let nomeCampo = input.name; // Nome do quesito
             let valorCampo = input.value.trim();
 
-            if (avaliador === "Airton Moreira") { //avaliador === "Celso Ribeiro"
+            if (avaliador === "Airton Moreira" || avaliador === "Celso Ribeiro") { //avaliador === "Celso Ribeiro"
                 if (input.type === "hidden") {
                     let valor = valorCampo === "" ? NaN : parseFloat(valorCampo);
                     if (isNaN(valor) || valor < 0 || valor > 10) {
@@ -1720,13 +1720,13 @@ function habibilitarCampos() {
         document.getElementById("btnMinusAlinhamento").disabled = (errosAlin === 0);
         document.getElementById("btnPlusAlinhamento").disabled = (errosAlin === 40);
     } 
-    //else if (avaliador === "Celso Ribeiro") {
-    //     const errosCober = parseInt(document.getElementById("errosCobertura").textContent);
+    else if (avaliador === "Celso Ribeiro") {
+        const errosCober = parseInt(document.getElementById("errosCobertura").textContent);
 
-    //     // Atualiza os botões de instrumental
-    //     document.getElementById("btnMinusCobertura").disabled = (errosCober === 0);
-    //     document.getElementById("btnPlusCobertura").disabled = (errosCober === 40);
-    // }
+        // Atualiza os botões de instrumental
+        document.getElementById("btnMinusCobertura").disabled = (errosCober === 0);
+        document.getElementById("btnPlusCobertura").disabled = (errosCober === 40);
+    }
 }
 
 // // Função para gerar PDF
@@ -1748,14 +1748,14 @@ const SELETOR_ALVO_CAPTURA = ".container-pai";
 const AVALIADORES_LITE = [
   "Eliane Humberg",        // Uniformidade e Instrumental
   "Antônio Carlos Schmidt",// Marcha
-//   "Felipe Sangali",        // Garbo
+  "Felipe Sangali",        // Garbo
   "Airton Moreira",        // Alinhamento
-//   "Celso Ribeiro",         // Cobertura
+  "Celso Ribeiro",         // Cobertura
   "Checkin",               // Check-In
   "Cronômetro",            // Cronômetro
   "Faixa Etária",          // Faixa Etária
   "Checklist",             // Check List
-  "Guilherme",             // Check List Linha de Frente
+  "Guilherme Souza",             // Check List Linha de Frente
 ];
 
 const ASPECTOS_LITE = [
@@ -1998,9 +1998,9 @@ function resetForm() {
         resetarMarcha();
     }
 
-    // if (avaliador === "Felipe Sangali") {
-    //     resetarGarbo();
-    // }
+    if (avaliador === "Felipe Sangali") {
+        resetarGarbo();
+    }
 
     if (avaliador === "Airton Moreira") {
         resetarAlinhamento();
